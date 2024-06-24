@@ -67,4 +67,4 @@ if __name__ == '__main__':
 
 ### Licensing
 
-cognixcore is licensed under the [LGPL License](github.com/leon-thomm/ryvencore/blob/master/LICENSE).
+cognixcore is licensed under the [LGPL License](https://github.com/CogniX-Up/cognixcore/blob/main/LICENSE).
