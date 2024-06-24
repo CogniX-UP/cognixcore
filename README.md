@@ -11,14 +11,14 @@ PyPi installation is in the works. Python Version should at least be 3.11.
 
 Install from sources - preferably after creating and activating a [python virtual environment](https://docs.python.org/3/library/venv.html): 
 ```
-git clone https://github.com/leon-thomm/ryvencore
+git clone https://github.com/CogniX-Up/cognixcore.git
 cd cognixcore
 pip install .
 ```
 
 ### Usage
 
-The API should be quite stable. However, if at some point the current design is deemed outdated or hinders any kind of major workflow, breaking changes will be introduced. For a guide on how to get started and what you can actually do, visit the [docs].
+The API should be quite stable. However, if at some point the current design is deemed outdated or hinders any kind of major workflow, breaking changes will be introduced. For a guide on how to get started and what you can actually do, visit the [docs](https://cognix-up.github.io/cognixcore/).
 
 ### Features
 
