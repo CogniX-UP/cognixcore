@@ -1,0 +1,876 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="cognixcore" href="../autoapi/cognixcore/index.html" /><link rel="prev" title="cognixcore v0.9" href="../index.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>Tutorial - cognixcore v0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">cognixcore v0.9 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">cognixcore v0.9 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Tutorial</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../autoapi/cognixcore/index.html">cognixcore</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of cognixcore</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/cognixcore/addons/index.html">cognixcore.addons</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of cognixcore.addons</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../autoapi/cognixcore/addons/variables/index.html">cognixcore.addons.variables</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of cognixcore.addons.variables</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autoapi/cognixcore/addons/variables/builtin/index.html">cognixcore.addons.variables.builtin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/cognixcore/addons/builtin/index.html">cognixcore.addons.builtin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/cognixcore/addons/logging/index.html">cognixcore.addons.logging</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/cognixcore/config/index.html">cognixcore.config</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of cognixcore.config</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/cognixcore/config/traits/index.html">cognixcore.config.traits</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/cognixcore/networking/index.html">cognixcore.networking</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of cognixcore.networking</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/cognixcore/networking/rest_api/index.html">cognixcore.networking.rest_api</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/base/index.html">cognixcore.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/flow/index.html">cognixcore.flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/flow_executor/index.html">cognixcore.flow_executor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/flow_player/index.html">cognixcore.flow_player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/info_msgs/index.html">cognixcore.info_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/models/index.html">cognixcore.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/node/index.html">cognixcore.node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/port/index.html">cognixcore.port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/rc/index.html">cognixcore.rc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/serializers/index.html">cognixcore.serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/session/index.html">cognixcore.session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/cognixcore/utils/index.html">cognixcore.utils</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/tutorial/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="tutorial">
+<span id="id1"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">¶</a></h1>
+<p>Welcome to the <a class="reference internal" href="../autoapi/cognixcore/index.html#module-cognixcore" title="cognixcore"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cognixcore</span></code></a> tutorial. Creating nodes and using them is
+quite simple, as you will see.</p>
+<section id="a-good-starting-example">
+<h2>A good starting example<a class="headerlink" href="#a-good-starting-example" title="Link to this heading">¶</a></h2>
+<p>In this example, we’re going to see how to create two nodes that can work together. One node represents a <code class="code docutils literal notranslate"><span class="pre">Number</span></code> while the other adds two <code class="code docutils literal notranslate"><span class="pre">Numbers</span></code>.</p>
+<p>First, our imports. All we need is the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node" title="cognixcore.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.Node</span></code></a> and <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.PortConfig" title="cognixcore.PortConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.PortConfig</span></code></a> from <a class="reference internal" href="../autoapi/cognixcore/index.html#module-cognixcore" title="cognixcore"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cognixcore</span></code></a> and the <code class="code docutils literal notranslate"><span class="pre">Number</span></code> from <code class="code docutils literal notranslate"><span class="pre">numbers</span></code> Python package.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">cognixcore</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="linenos">2</span>    <span class="n">Node</span><span class="p">,</span>
+<span class="linenos">3</span>    <span class="n">PortConfig</span><span class="p">,</span>
+<span class="linenos">4</span><span class="p">)</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Number</span>
+</pre></div>
+</div>
+<p>Now, we will define two classes that represent our nodes.</p>
+<section id="numbernode">
+<h3>NumberNode<a class="headerlink" href="#numbernode" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cognixcore.config</span> <span class="kn">import</span> <span class="n">NodeConfig</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">NumberNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;This node outputs any kind of number&quot;&quot;&quot;</span>
+<span class="linenos"> 5</span>    
+<span class="linenos"> 6</span>    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Number&#39;</span>
+<span class="linenos"> 7</span>    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.1&#39;</span>
+<span class="linenos"> 8</span>    
+<span class="linenos"> 9</span>    <span class="n">init_outputs</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">10</span>        <span class="n">PortConfig</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">allowed_data</span><span class="o">=</span><span class="n">Number</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="p">]</span>
+<span class="linenos">12</span>    
+<span class="linenos">13</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">,</span> <span class="n">config</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos">14</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="linenos">15</span>        <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">16</span>    
+</pre></div>
+</div>
+<p>Notice that our class extends the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node" title="cognixcore.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.Node</span></code></a> class. In doing so we’ve created a node blueprint. We’ve also defined two class attributes, namely <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.title" title="cognixcore.Node.title"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.Node.title</span></code></a> and <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.version" title="cognixcore.Node.version"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.Node.version</span></code></a>. It’s a good convention to define these attributes, as they might be used in some other context. <em>For example</em>, in the CogniX Editor, the <code class="code docutils literal notranslate"><span class="pre">title</span></code> is displayed over a node’s GUI, while the <code class="code docutils literal notranslate"><span class="pre">version</span></code> is used to filter out which nodes we want to include (no <code class="code docutils literal notranslate"><span class="pre">version</span></code> means the node won’t be included in the editor packages)</p>
+<p>The <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.init_outputs" title="cognixcore.Node.init_outputs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.Node.init_outputs</span></code></a> attribute is a list that contains the output ports that we want our node to have at instantiation. The <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.PortConfig" title="cognixcore.PortConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.PortConfig</span></code></a> class is responsible for generating the port that we want. We can give the port a <code class="code docutils literal notranslate"><span class="pre">label</span></code> and also set restrictions on its output type, by using the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.PortConfig.allowed_data" title="cognixcore.PortConfig.allowed_data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.PortConfig.allowed_data</span></code></a> attribute. The <code class="code docutils literal notranslate"><span class="pre">allowed_data</span></code> can be <code class="code docutils literal notranslate"><span class="pre">None</span></code>, which essentially tells <code class="code docutils literal notranslate"><span class="pre">cognixcore</span></code> that this port can output anything, or any kind fo python <a class="reference external" href="https://docs.python.org/3/library/typing.html">type hint</a>. Allowed data through <code class="code docutils literal notranslate"><span class="pre">type</span> <span class="pre">hinting</span></code> is checked when nodes are connected as well as when outputing data through a port. These checks are made possible through the excellent <a class="reference external" href="https://beartype.readthedocs.io/en/latest/">beartype</a> package.</p>
+<p>Alls that’s left is our “processing” logic. How will the node update itself? By overriding the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.update_event" title="cognixcore.Node.update_event"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.update_event()</span></code></a> method. The <code class="code docutils literal notranslate"><span class="pre">update_event</span></code> updates the node based on an input port. In this case, the <code class="code docutils literal notranslate"><span class="pre">NumberNode</span></code> does not have any inputs and only needs to output the internal number it represents.</p>
+</section>
+<section id="addnode">
+<h3>AddNode<a class="headerlink" href="#addnode" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>        <span class="bp">self</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>
+<span class="linenos"> 2</span>        
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">AddNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 5</span><span class="sd">    This is a node that adds two numbers. The numbers can </span>
+<span class="linenos"> 6</span><span class="sd">    be any type of number</span>
+<span class="linenos"> 7</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 8</span>    
+<span class="linenos"> 9</span>    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Add&#39;</span>
+<span class="linenos">10</span>    <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;0.1&#39;</span>
+<span class="linenos">11</span>    
+<span class="linenos">12</span>    <span class="n">init_inputs</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">13</span>        <span class="n">PortConfig</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;num1&#39;</span><span class="p">,</span> <span class="n">allowed_data</span><span class="o">=</span><span class="n">Number</span><span class="p">),</span>
+<span class="linenos">14</span>        <span class="n">PortConfig</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;num2&#39;</span><span class="p">,</span> <span class="n">allowed_data</span><span class="o">=</span><span class="n">Number</span><span class="p">)</span>
+<span class="linenos">15</span>    <span class="p">]</span>
+<span class="linenos">16</span>    <span class="n">init_outputs</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">17</span>        <span class="n">PortConfig</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="n">allowed_data</span><span class="o">=</span><span class="n">Number</span><span class="p">)</span>
+<span class="linenos">18</span>    <span class="p">]</span>
+<span class="linenos">19</span>    
+<span class="linenos">20</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">,</span> <span class="n">config</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos">21</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="linenos">22</span>        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">23</span>        
+<span class="linenos">24</span>    <span class="k">def</span> <span class="nf">update_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">25</span>        
+<span class="linenos">26</span>        <span class="c1"># Get the number of the current input</span>
+<span class="linenos">27</span>        <span class="n">num</span><span class="p">:</span> <span class="n">Number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+<span class="linenos">28</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">num</span><span class="p">:</span>
+<span class="linenos">29</span>            <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">30</span>        
+<span class="linenos">31</span>        <span class="c1"># get the number on the other port</span>
+<span class="linenos">32</span>        <span class="n">other_port</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">inp</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">1</span>
+<span class="linenos">33</span>        <span class="n">other_num</span><span class="p">:</span> <span class="n">Number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">other_port</span><span class="p">)</span>
+<span class="linenos">34</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">other_num</span><span class="p">:</span>
+<span class="linenos">35</span>            <span class="n">other_num</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">36</span>        
+<span class="linenos">37</span>        <span class="c1"># add them and output</span>
+<span class="linenos">38</span>        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">num</span> <span class="o">+</span> <span class="n">other_num</span>
+<span class="linenos">39</span>        <span class="bp">self</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In similar fashion, we define an <code class="code docutils literal notranslate"><span class="pre">AddNode</span></code>. The difference between the <code class="code docutils literal notranslate"><span class="pre">AddNode</span></code> and the <code class="code docutils literal notranslate"><span class="pre">NumberNode</span></code> is that this node has input ports through the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.init_inputs" title="cognixcore.Node.init_inputs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.Node.init_inputs</span></code></a> attribute. Notice that that both of the inputs have their <code class="code docutils literal notranslate"><span class="pre">allowed_data</span></code> set to <code class="code docutils literal notranslate"><span class="pre">Number</span></code>. This is an essential part that will be explained later.</p>
+<p>Lets interpret the <code class="code docutils literal notranslate"><span class="pre">update_event</span></code>. The <code class="code docutils literal notranslate"><span class="pre">AddNode</span></code> is updated with a given input. Using the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.input" title="cognixcore.Node.input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.input()</span></code></a> method, we’re reading the value of the connected output of a port that outputs a <code class="code docutils literal notranslate"><span class="pre">Number</span></code> as input to the <code class="code docutils literal notranslate"><span class="pre">AddNode</span></code>. In our case, this should be an output port of a <code class="code docutils literal notranslate"><span class="pre">NumberNode</span></code>, since we have not defined any other nodes that output numbers. We’re then checking to see if our input is indeed a number, otherwise we set it to 0. We proceed to grab the value of the other input port in a similar fashion, add them together and output them through the only output port of the <code class="code docutils literal notranslate"><span class="pre">AddNode</span></code>.</p>
+</section>
+<section id="using-the-nodes">
+<h3>Using the nodes<a class="headerlink" href="#using-the-nodes" title="Link to this heading">¶</a></h3>
+<p>Defining the nodes is a good starting point for any kind of node-based library. However, there is a need to also be able to create, connect them and eventually evaluate a graph. This would typically happen in a visual editor, such as the CogniX Editor, but can also happen in a script.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cognixcore</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="linenos"> 2</span>    <span class="n">Flow</span><span class="p">,</span>
+<span class="linenos"> 3</span>    <span class="n">Session</span>
+<span class="linenos"> 4</span><span class="p">)</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="linenos"> 7</span><span class="c1"># Register the nodes</span>
+<span class="linenos"> 8</span><span class="n">session</span><span class="o">.</span><span class="n">register_node_types</span><span class="p">([</span><span class="n">NumberNode</span><span class="p">,</span> <span class="n">AddNode</span><span class="p">])</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">flow</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">create_flow</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Example&#39;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># First number node</span>
+<span class="linenos">13</span><span class="n">num_one</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">NumberNode</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">num_one</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># second number node</span>
+<span class="linenos">17</span><span class="n">num_two</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">NumberNode</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">num_two</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mf">324.25</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="c1"># add node</span>
+<span class="linenos">21</span><span class="n">add_node</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">AddNode</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="n">flow</span><span class="o">.</span><span class="n">connect_nodes</span><span class="p">(</span><span class="n">num_one</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">add_node</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">24</span><span class="n">flow</span><span class="o">.</span><span class="n">connect_nodes</span><span class="p">(</span><span class="n">num_two</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">add_node</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="nb">print</span><span class="p">(</span><span class="n">add_node</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We’re starting by creating a <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Session" title="cognixcore.Session"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.Session</span></code></a>, then registering our nodes to the <code class="code docutils literal notranslate"><span class="pre">Session</span></code>. <code class="code docutils literal notranslate"><span class="pre">cognixcore</span></code>, despite offering saving and loading capabilities, does not save/load the node types. This is left to the external “package” manager that any user of the library might have to create.</p>
+<p>After the <code class="code docutils literal notranslate"><span class="pre">Session</span></code> is created, we create a <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Flow" title="cognixcore.Flow"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.Flow</span></code></a> to the session, titled <code class="code docutils literal notranslate"><span class="pre">Example</span></code>. We then proceed to create two <code class="code docutils literal notranslate"><span class="pre">NumberNodes</span></code> and assign a number to each of them. Lastly, an <code class="code docutils literal notranslate"><span class="pre">AddNode</span></code> is created and the two outputs of the number nodes are connected to the inputs of the add node. Notice that the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Flow.connect_nodes" title="cognixcore.Flow.connect_nodes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Flow.connect_nodes()</span></code></a> has a <code class="code docutils literal notranslate"><span class="pre">silent</span></code> parameter, which is defaulted to <code class="code docutils literal notranslate"><span class="pre">False</span></code>. When set to <code class="code docutils literal notranslate"><span class="pre">False</span></code>, data will be propagated from the  number node to the add node through the <code class="code docutils literal notranslate"><span class="pre">update_event</span></code> and <code class="code docutils literal notranslate"><span class="pre">set_ouput</span></code> methods, based on the kind of <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.FlowExecutor" title="cognixcore.FlowExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.FlowExecutor</span></code></a> executor attached to <code class="code docutils literal notranslate"><span class="pre">Flow</span></code>. More on that later.</p>
+<p>And that’s it, we have defined two different kind of nodes, imported them in a session, connected them and let them do their magic. Easy, isn’t it?</p>
+<p>Now that we’ve covered the most basic aspects of the library, such as defining nodes, ports and the <code class="code docutils literal notranslate"><span class="pre">update_event</span></code>,
+lets dive in the various functionalities and gotchas of <code class="code docutils literal notranslate"><span class="pre">cognixcore</span></code>. Most of the sections below are also detailed
+in the concrete API documentation.</p>
+</section>
+</section>
+<section id="initializations">
+<h2>Initializations<a class="headerlink" href="#initializations" title="Link to this heading">¶</a></h2>
+<p>This section briefly explains the initializations and de-initializations that may occur for a node.</p>
+<section id="init">
+<h3>__init__<a class="headerlink" href="#init" title="Link to this heading">¶</a></h3>
+<p>As is typical with every Python class, the <code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.__init__()</span></code> constructor is called upon
+instantiation of a <code class="code docutils literal notranslate"><span class="pre">Node</span></code>. This constructor is only called once.</p>
+</section>
+<section id="place-event">
+<h3>place_event<a class="headerlink" href="#place-event" title="Link to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.place_event" title="cognixcore.Node.place_event"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.place_event()</span></code></a> method is invoked whenever a <code class="code docutils literal notranslate"><span class="pre">Node</span></code> is placed inside a flow.
+Essentially, this defines what should happen when someone “drops” or “creates” a node inside a <code class="code docutils literal notranslate"><span class="pre">Flow</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This event might be deprecated in the near future in favor of the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.init" title="cognixcore.Node.init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.init()</span></code></a> method.</p>
+</div>
+</section>
+<section id="id2">
+<h3>init<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.init" title="cognixcore.Node.init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.init()</span></code></a> method is defined as an initialization point for a node, but not only at
+construction time. Currently, it is invoked whenever a <code class="code docutils literal notranslate"><span class="pre">Flow</span></code> is evaluated through a <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.GraphPlayer" title="cognixcore.GraphPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.GraphPlayer</span></code></a>,
+right before the <code class="code docutils literal notranslate"><span class="pre">update_event</span></code>. More on the <code class="code docutils literal notranslate"><span class="pre">GraphPlayer</span></code> later.</p>
+</section>
+<section id="stop">
+<h3>stop<a class="headerlink" href="#stop" title="Link to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.stop" title="cognixcore.Node.stop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.stop()</span></code></a> method is invoked whenever a <code class="code docutils literal notranslate"><span class="pre">Flow</span></code> has finished evaluating through a <code class="code docutils literal notranslate"><span class="pre">GraphPlayer</span></code>.</p>
+</section>
+</section>
+<section id="flow-executors-graph-players">
+<h2>Flow Executors - Graph Players<a class="headerlink" href="#flow-executors-graph-players" title="Link to this heading">¶</a></h2>
+<p>This section notes the importance of <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.FlowExecutor" title="cognixcore.FlowExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.FlowExecutor</span></code></a> (s) and <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.GraphPlayer" title="cognixcore.GraphPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.GraphPlayer</span></code></a> (s).</p>
+<p>Per the original <a class="reference external" href="https://github.com/leon-thomm/ryvencore">ryvencore</a>, there were different algorithms to handle the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.update_event" title="cognixcore.Node.update_event"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.update_event()</span></code></a> and <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.set_output" title="cognixcore.Node.set_output"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.set_output()</span></code></a>. The basis of these algorithms is the class <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.FlowExecutor" title="cognixcore.FlowExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.FlowExecutor</span></code></a> and its implementations. Each flow can have its executor set from <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Flow.set_algorithm_mode" title="cognixcore.Flow.set_algorithm_mode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Flow.set_algorithm_mode()</span></code></a> or <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Flow.algorithm_mode" title="cognixcore.Flow.algorithm_mode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Flow.algorithm_mode()</span></code></a>. Detailed documentation can be found in <a class="reference internal" href="../autoapi/cognixcore/flow_executor/index.html#module-cognixcore.flow_executor" title="cognixcore.flow_executor"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cognixcore.flow_executor</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.flow_executor.Flow</span></code>.</p>
+<section id="data-flow">
+<h3>Data Flow<a class="headerlink" href="#data-flow" title="Link to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.DataFlowNaive" title="cognixcore.DataFlowNaive"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.DataFlowNaive</span></code></a> is a simple implementation of data-flow execution. Setting a node output leads to an immediate update in all successors consecutively. No runtime optimization is performed, and some types of graphs can run really slow here, especially if the include “diamonds”.</p>
+<p>Assumptions for the graph:
+- no non-terminating feedback loops</p>
+</section>
+<section id="data-flow-optimized">
+<h3>Data Flow Optimized<a class="headerlink" href="#data-flow-optimized" title="Link to this heading">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Check the documentation in <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Flow" title="cognixcore.Flow"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.Flow</span></code></a>. This is an original <code class="code docutils literal notranslate"><span class="pre">ryvencore</span></code> functionality and is documented
+as such. However, at its current state, <code class="code docutils literal notranslate"><span class="pre">cognixcore</span></code> is better suited for such operations through the <code class="code docutils literal notranslate"><span class="pre">GraphPlayer</span></code>.</p>
+</div>
+<p>This is a special flow executor which implements some node functions to optimize flow execution. Whenever a new execution is invoked somewhere (some node <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.update" title="cognixcore.Node.update"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.Node.update</span></code></a> or output <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.set_output" title="cognixcore.Node.set_output"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.Node.set_output</span></code></a> is updated), it analyses the graph’s connected component (of successors) where the execution was invoked and creates a few data structures to reverse engineer how many input updates every node possibly receives in this execution. A node’s outputs are propagated once
+no input can still receive new data from a predecessor node. Therefore, while a node gets updated every time an input receives some data, every OUTPUT is only updated ONCE.</p>
+<p>This implies that every connection is activated at most once in an execution. This can result in asymptotic speedup in large data flows compared to normal data flow execution where any two executed branches which merge again in the future result in two complete executions of anything that comes after the merge, which quickly produces exponential performance issues.</p>
+</section>
+<section id="exec-flow-naive">
+<h3>Exec Flow Naive<a class="headerlink" href="#exec-flow-naive" title="Link to this heading">¶</a></h3>
+<p>In <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.ExecFlowNaive" title="cognixcore.ExecFlowNaive"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.ExecFlowNaive</span></code></a>, we deviate from the common data flow paradigm. No data is propagated and instead of <code class="code docutils literal notranslate"><span class="pre">set_output</span></code> we have <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.exec_output" title="cognixcore.Node.exec_output"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.exec_output()</span></code></a>. For more information, look at the documentation of <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Flow" title="cognixcore.Flow"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.Flow</span></code></a>.</p>
+</section>
+<section id="manual-flow">
+<h3>Manual Flow<a class="headerlink" href="#manual-flow" title="Link to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.ManualFlow" title="cognixcore.ManualFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.ManualFlow</span></code></a> is an executor that doesn’t propagate any data between nodes at default. It also doesn’t handle the <code class="code docutils literal notranslate"><span class="pre">exec_output</span></code> method. This execution algorithm simply keeps a state of the outputs that have been updated through a call to <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.set_output" title="cognixcore.Node.set_output"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.set_output()</span></code></a>. What we refer to as “manual execution” thus is the external evaluation  of the whole flow graph, through the means of a <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.GraphPlayer" title="cognixcore.GraphPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.GraphPlayer</span></code></a>. While the other executors update their nodes upon connecting and disconnecting their ports, this executor is simply of a state of the current updates and the graph’s evaluation is done externally.</p>
+</section>
+<section id="graph-player">
+<h3>Graph Player<a class="headerlink" href="#graph-player" title="Link to this heading">¶</a></h3>
+<p>A <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.GraphPlayer" title="cognixcore.GraphPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.GraphPlayer</span></code></a> and its concrete implementation <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.FlowPlayer" title="cognixcore.FlowPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.FlowPlayer</span></code></a> act as evaluators of a graph
+as a Python program. Through this component, nodes that are formed into a flow are assembled and eventually evaluated. This
+class is associated with the following methods:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.GraphPlayer.play" title="cognixcore.GraphPlayer.play"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.GraphPlayer.play()</span></code></a>: This method is called when the graph starts playing or is evaluated and will invoked the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.init" title="cognixcore.Node.init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.init()</span></code></a> method.</p></li>
+<li><p><a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.GraphPlayer.pause" title="cognixcore.GraphPlayer.pause"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.GraphPlayer.pause()</span></code></a>: This method is called when the graph is paused, but can continue. A pause state is only available on graphs that have a <code class="code docutils literal notranslate"><span class="pre">FrameNode</span></code> incorporated, otherwise the graph will evaluate only once and exit, akin to a Python program running and finishing without any other user input.</p></li>
+<li><p><a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.GraphPlayer.resume" title="cognixcore.GraphPlayer.resume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.GraphPlayer.resume()</span></code></a>: If the graph can be paused, then it can also be resumed. This method resumes the execution of the current graph.</p></li>
+<li><p><a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.GraphPlayer.stop" title="cognixcore.GraphPlayer.stop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.GraphPlayer.stop()</span></code></a>: This method stops the graph completely and is called on demand if the graph contains <code class="code docutils literal notranslate"><span class="pre">FrameNode</span></code> (s) or automatically if it doesn’t. Invokes the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.stop" title="cognixcore.Node.stop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.stop()</span></code></a> method.</p></li>
+</ul>
+<p>How does the default <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.FlowPlayer" title="cognixcore.FlowPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.FlowPlayer</span></code></a> work? The first step is to find all the active nodes in a flow. A node is considered active when it has connections or is a <code class="code docutils literal notranslate"><span class="pre">FrameNode</span></code> Subsequently, these nodes are separated into two categories. The root nodes and the frame nodes. The root nodes are nodes that have no input ports connected to them. Essentially, they act as a starting point for the evaluation. The frame nodes will be evaluated per <code class="code docutils literal notranslate"><span class="pre">frame</span></code>.</p>
+<p>The active nodes are then initialized. Each node may have resources that need to be initialized based on their configuration. The nodes are then evaluated based on a Breadth First Search (BFS) algorithm to ensure that each node is evaluated only once for each connected input. After the evaluation, the algorithm checks the number of active frame nodes. If there are frame nodes present in the graph that need evaluation, they are evaluated. The successors of the frame nodes are then updated as if they were the root nodes. This frame node evaluation process is repeated until the user manually stops the graph or every frame node has finished its operation based on an internal condition.</p>
+<p>A simple example on how to play a graph is provided below. Note that the executor is automatically changed to <code class="code docutils literal notranslate"><span class="pre">ManualFlow</span></code>, but will be changed back to the previous algorithm node when the
+graph evaluation is stopped.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cognixcore</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="linenos"> 2</span>    <span class="n">Session</span><span class="p">,</span>
+<span class="linenos"> 3</span>    <span class="n">FlowAlg</span><span class="p">,</span>
+<span class="linenos"> 4</span><span class="p">)</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="linenos"> 7</span><span class="n">flow</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">create_flow</span><span class="p">(</span><span class="s2">&quot;Example Flow&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">flow</span><span class="o">.</span><span class="n">algorithm_mode</span> <span class="o">=</span> <span class="n">FlowAlg</span><span class="o">.</span><span class="n">DATA_OPT</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="c1"># This will manually set it to a ManualFlow executor</span>
+<span class="linenos">11</span><span class="n">session</span><span class="o">.</span><span class="n">play_flow</span><span class="p">(</span><span class="s2">&quot;Example Flow&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It’s always better to use the <code class="code docutils literal notranslate"><span class="pre">Session</span></code> to evaluate a graph through a <code class="code docutils literal notranslate"><span class="pre">GraphPlayer</span></code> rather
+than through the <code class="code docutils literal notranslate"><span class="pre">GraphPlayer</span></code> or the <code class="code docutils literal notranslate"><span class="pre">Flow</span></code>, as these methods also invoke certain events and handle threading better, if the player is invoked in another thread (check the <code class="code docutils literal notranslate"><span class="pre">on_other_thread</span></code>) parameter of the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Session.play_flow" title="cognixcore.Session.play_flow"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Session.play_flow()</span></code></a> method.</p>
+</section>
+</section>
+<section id="frame-node">
+<h2>Frame Node<a class="headerlink" href="#frame-node" title="Link to this heading">¶</a></h2>
+<p>The <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.FrameNode" title="cognixcore.FrameNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.FrameNode</span></code></a> is a special type of node that in conjuction with a <code class="code docutils literal notranslate"><span class="pre">GraphPlayer</span></code>. A frame node is evaluated once per “frame”. A frame in a <code class="code docutils literal notranslate"><span class="pre">GraphPlayer</span></code> denotes an execution step where the player needs to update all its frame nodes, through the approach
+described previously. Lets see a basic example.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cognixcore</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="linenos"> 2</span>    <span class="n">Session</span><span class="p">,</span>
+<span class="linenos"> 3</span>    <span class="n">Node</span><span class="p">,</span>
+<span class="linenos"> 4</span>    <span class="n">FrameNode</span><span class="p">,</span>
+<span class="linenos"> 5</span>    <span class="n">PortConfig</span>
+<span class="linenos"> 6</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Number</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="k">class</span> <span class="nc">NumberGeneratorNode</span><span class="p">(</span><span class="n">FrameNode</span><span class="p">):</span>
+<span class="linenos">11</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a number&quot;&quot;&quot;</span>
+<span class="linenos">12</span>    
+<span class="linenos">13</span>    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Number Generator&#39;</span>
+<span class="linenos">14</span>    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;v0.1&#39;</span>
+<span class="linenos">15</span>    
+<span class="linenos">16</span>    <span class="n">init_outputs</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">17</span>        <span class="n">PortConfig</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">allowed_data</span><span class="o">=</span><span class="n">Number</span><span class="p">)</span>
+<span class="linenos">18</span>    <span class="p">]</span>
+<span class="linenos">19</span>    
+<span class="linenos">20</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">):</span>
+<span class="linenos">21</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
+<span class="linenos">22</span>        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="linenos">23</span>    
+<span class="linenos">24</span>    <span class="k">def</span> <span class="nf">frame_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">25</span>        <span class="n">num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">*</span> <span class="n">random</span><span class="p">()</span>
+<span class="linenos">26</span>        <span class="bp">self</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+<span class="linenos">27</span>    
+<span class="linenos">28</span><span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="linenos">29</span><span class="n">session</span><span class="o">.</span><span class="n">register_node_types</span><span class="p">([</span><span class="n">NumberGeneratorNode</span><span class="p">,</span> <span class="n">AddNode</span><span class="p">])</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="n">flow</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">create_flow</span><span class="p">(</span><span class="s1">&#39;Random Number Generation&#39;</span><span class="p">)</span>
+<span class="linenos">32</span><span class="n">rnd_node</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">NumberGeneratorNode</span><span class="p">)</span>
+<span class="linenos">33</span><span class="n">add_node</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">AddNode</span><span class="p">)</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="n">flow</span><span class="o">.</span><span class="n">connect_nodes</span><span class="p">(</span><span class="n">rnd_node</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">add_node</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="n">session</span><span class="o">.</span><span class="n">play_flow</span><span class="p">(</span>
+<span class="linenos">38</span>    <span class="s1">&#39;Random Number Generation&#39;</span><span class="p">,</span>
+<span class="linenos">39</span>    <span class="n">on_other_thread</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos">40</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We begin by defining a <code class="code docutils literal notranslate"><span class="pre">FrameNode</span></code>. This node has only one output. We then implement its <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.FrameNode.frame_update" title="cognixcore.FrameNode.frame_update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.FrameNode.frame_update()</span></code></a> method. This method will be called one per frame, generating
+a random number and outputting it through its port. We then create a session, register our node and
+instantiate it, along with the <code class="code docutils literal notranslate"><span class="pre">AddNode</span></code> from our first example. We then connect the nodes and
+play the flow. If we want the current flow of execution to not be stopped, we should pass <code class="code docutils literal notranslate"><span class="pre">True</span></code> to the <code class="code docutils literal notranslate"><span class="pre">on_other_thread</span></code> parameter, as shown.</p>
+</section>
+<section id="quality-of-life">
+<h2>Quality of Life<a class="headerlink" href="#quality-of-life" title="Link to this heading">¶</a></h2>
+<p>The above sections include the main functionalities of the <code class="code docutils literal notranslate"><span class="pre">cognixcore</span></code> library. In this section, we’ll focus on  some QoL utilities that work out of the box with the CogniX Editor.</p>
+<section id="loading-saving">
+<h3>Loading/saving<a class="headerlink" href="#loading-saving" title="Link to this heading">¶</a></h3>
+<p>The nodes support state saving and loading through the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.load" title="cognixcore.Node.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.load()</span></code></a> and <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.data" title="cognixcore.Node.data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.data()</span></code></a> methods. Additionally, there are similar methods that can be found for the <code class="code docutils literal notranslate"><span class="pre">Session</span></code> and <code class="code docutils literal notranslate"><span class="pre">Flow</span></code>, however these should rarely be overriden.</p>
+</section>
+<section id="progress-state">
+<h3>Progress State<a class="headerlink" href="#progress-state" title="Link to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.ProgressState" title="cognixcore.ProgressState"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.ProgressState</span></code></a> is a class that helps with setting the state of a node. In the context of simply scripting, this doesn’t do much. However, it exists as an out of the box solution for any kind of GUI library that needs to define ongoing progress for a node. For example, the CogniX Editor automatically utilizes this to set a GUI that reacts to progress changes.</p>
+</section>
+<section id="loggers">
+<h3>Loggers<a class="headerlink" href="#loggers" title="Link to this heading">¶</a></h3>
+<p>Each node and flow have a logger through the <a class="reference internal" href="../autoapi/cognixcore/addons/logging/index.html#module-cognixcore.addons.logging" title="cognixcore.addons.logging"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cognixcore.addons.logging</span></code></a> module, based on Python’s <a class="reference external" href="https://docs.python.org/3/library/logging.html">logging</a> module. This can be accessed through their respective properties (<a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.logger" title="cognixcore.Node.logger"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.Node.logger</span></code></a> and <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Flow.logger" title="cognixcore.Flow.logger"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.Flow.logger</span></code></a>).</p>
+</section>
+<section id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Link to this heading">¶</a></h3>
+<p>Each node has access to a <a class="reference internal" href="../autoapi/cognixcore/addons/variables/index.html#cognixcore.addons.variables.VarsAddon" title="cognixcore.addons.variables.VarsAddon"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.addons.variables.VarsAddon</span></code></a> for reading and setting the
+state of dynamic variables. Refer to the documentation for further details.</p>
+</section>
+<section id="node-actions">
+<h3>Node Actions<a class="headerlink" href="#node-actions" title="Link to this heading">¶</a></h3>
+<p>A node can define actions through the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.NodeAction" title="cognixcore.NodeAction"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.NodeAction</span></code></a> and the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.add_action" title="cognixcore.Node.add_action"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.add_action()</span></code></a> and <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.add_generic_action" title="cognixcore.Node.add_generic_action"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.add_generic_action()</span></code></a> methods. In doing so, a context menu is populated for a node’s GUI with the actions defined in the CogniX Editor. You would typically define the actions in the <code class="code docutils literal notranslate"><span class="pre">__init__</span></code> method of a node.</p>
+<p>Dynamic ports</p>
+<p>The static <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.init_inputs" title="cognixcore.Node.init_inputs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.Node.init_inputs</span></code></a> and <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.init_outputs" title="cognixcore.Node.init_outputs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.Node.init_outputs</span></code></a> initialization lists only work when a node is instantiated but not loaded through data. A node instance supports adding or removing ports dynamically at runtime. This is done through the following methods:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.create_input" title="cognixcore.Node.create_input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.create_input()</span></code></a></p></li>
+<li><p><a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.delete_output" title="cognixcore.Node.delete_output"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.delete_output()</span></code></a></p></li>
+<li><p><a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.create_output" title="cognixcore.Node.create_output"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.create_output()</span></code></a></p></li>
+<li><p><a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.delete_output" title="cognixcore.Node.delete_output"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cognixcore.Node.delete_output()</span></code></a></p></li>
+</ul>
+</section>
+<section id="node-configuration">
+<h3>Node Configuration<a class="headerlink" href="#node-configuration" title="Link to this heading">¶</a></h3>
+<p>A node can have a configuration attached to it. This is done by either defining an internal to the node class explicitly named <code class="code docutils literal notranslate"><span class="pre">Config</span></code> or by setting the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Node.inner_config_type" title="cognixcore.Node.inner_config_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.Node.inner_config_type</span></code></a> type to a specific node config. The base class for a configuration is the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.NodeConfig" title="cognixcore.NodeConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.NodeConfig</span></code></a> class. A developer can override this class to create a custom configurable class.</p>
+<section id="configuration-by-traits">
+<h4>Configuration by Traits<a class="headerlink" href="#configuration-by-traits" title="Link to this heading">¶</a></h4>
+<p>The standard implementation for a node configuration is the <a class="reference internal" href="../autoapi/cognixcore/config/traits/index.html#cognixcore.config.traits.NodeTraitsConfig" title="cognixcore.config.traits.NodeTraitsConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.config.traits.NodeTraitsConfig</span></code></a> class. It utilizes the <a class="reference external" href="https://docs.enthought.com/traits/traits_tutorial/introduction.html">Traits</a> and <a class="reference external" href="https://docs.enthought.com/traitsui/">Traits UI</a> for out of the box data validation and GUI generation (for the CogniX Editor). This implementation allows for dynamic nesting of multiple configurations, all of which are saveable/loadable. Traits with the “CX” prefix should be preferred over typical traits (such as <code class="code docutils literal notranslate"><span class="pre">CX_Float</span></code> instead of <code class="code docutils literal notranslate"><span class="pre">Float</span></code>), because they invoke their changed event when pressing the enter button. This is mainly a CogniX Editor concern, coupled with its undo functionality. This section only serves as an introduction to traits and its <code class="code docutils literal notranslate"><span class="pre">cognixcore</span></code> configuration counterpart. Please refer to the original traits documentation for additional user-manuals and tutorials.</p>
+</section>
+<section id="port-list">
+<h4>Port list<a class="headerlink" href="#port-list" title="Link to this heading">¶</a></h4>
+<p>Along with the standard implementation for configuration, the <a class="reference internal" href="../autoapi/cognixcore/config/traits/index.html#module-cognixcore.config.traits" title="cognixcore.config.traits"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cognixcore.config.traits</span></code></a> module offers a class that makes it easier to incorporate dynamic port handling. This class is <a class="reference internal" href="../autoapi/cognixcore/config/traits/index.html#cognixcore.config.traits.PortList" title="cognixcore.config.traits.PortList"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.config.traits.PortList</span></code></a> class.</p>
+</section>
+</section>
+<section id="restful-api">
+<h3>RESTful API<a class="headerlink" href="#restful-api" title="Link to this heading">¶</a></h3>
+<p><code class="code docutils literal notranslate"><span class="pre">cognixcore</span></code> also offers the ability to run a RESTful API for a session. This can be done by accessing the API through the <a class="reference internal" href="../autoapi/cognixcore/index.html#cognixcore.Session.rest_api" title="cognixcore.Session.rest_api"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cognixcore.Session.rest_api</span></code></a> property. For more info regarding the API, you can run a session and the api and check the docs through <code class="code docutils literal notranslate"><span class="pre">localhost:&lt;port_number&gt;/docs</span></code>.</p>
+</section>
+</section>
+<section id="a-better-example">
+<h2>A better example<a class="headerlink" href="#a-better-example" title="Link to this heading">¶</a></h2>
+<p>To incorporate the above, we will iterate upon our first example to optimize the code and make it work better with the CogniX Editor.</p>
+<p>First, our imports. We’re using quite a lot more than before.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Self</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">cognixcore</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="linenos"> 5</span>    <span class="n">Node</span><span class="p">,</span>
+<span class="linenos"> 6</span>    <span class="n">PortConfig</span><span class="p">,</span>
+<span class="linenos"> 7</span>    <span class="n">ProgressState</span><span class="p">,</span>
+<span class="linenos"> 8</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">cognixcore.config.traits</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Number</span>
+<span class="linenos">12</span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="linenos">13</span><span class="kn">from</span> <span class="nn">cognixcore.config</span> <span class="kn">import</span> <span class="n">NodeConfig</span>
+</pre></div>
+</div>
+<section id="number-node">
+<h3>Number Node<a class="headerlink" href="#number-node" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">NumberNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;This node outputs any kind of number&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    
+<span class="linenos"> 4</span>    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Number&#39;</span>
+<span class="linenos"> 5</span>    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.1&#39;</span>
+<span class="linenos"> 6</span>    
+<span class="linenos"> 7</span>    <span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="n">NodeTraitsConfig</span><span class="p">):</span>
+<span class="linenos"> 8</span>        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Enum</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;mode for number generation&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span>        <span class="n">int_num</span> <span class="o">=</span> <span class="n">CX_Int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">visible_when</span><span class="o">=</span><span class="s1">&#39;mode==&quot;int&quot;&#39;</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;int number&quot;</span><span class="p">)</span>
+<span class="linenos">10</span>        <span class="n">float_num</span> <span class="o">=</span> <span class="n">CX_Int</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">visible_when</span><span class="o">=</span><span class="s1">&#39;mode==&quot;float&quot;&#39;</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;float number&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>        
+<span class="linenos">12</span>        <span class="k">def</span> <span class="nf">number</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Number</span><span class="p">:</span>
+<span class="linenos">13</span>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;random&#39;</span><span class="p">:</span>
+<span class="linenos">14</span>                <span class="k">return</span> <span class="n">random</span><span class="p">()</span>
+<span class="linenos">15</span>            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;int&#39;</span><span class="p">:</span>
+<span class="linenos">16</span>                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">int_num</span>
+<span class="linenos">17</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">18</span>                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">float_num</span>
+<span class="linenos">19</span>    
+<span class="linenos">20</span>    <span class="n">init_outputs</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">21</span>        <span class="n">PortConfig</span><span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">allowed_data</span><span class="o">=</span><span class="n">Number</span><span class="p">)</span>
+<span class="linenos">22</span>    <span class="p">]</span>
+<span class="linenos">23</span>    
+<span class="linenos">24</span>    <span class="nd">@property</span>
+<span class="linenos">25</span>    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Config</span><span class="p">:</span>
+<span class="linenos">26</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span>
+<span class="linenos">27</span>        
+<span class="linenos">28</span>    <span class="k">def</span> <span class="nf">update_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">29</span>        <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">ProgressState</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Outputing number&quot;</span><span class="p">)</span>
+<span class="linenos">30</span>        <span class="bp">self</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">number</span><span class="p">())</span>
+<span class="linenos">31</span>        <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>Notice that the <code class="code docutils literal notranslate"><span class="pre">NumberNode</span></code> now contains a configuration class. In this, we define a mode, giving our node different types of number generation. There is a <code class="code docutils literal notranslate"><span class="pre">random</span></code> mode, where the node returns a random number. Then there are two other modes, <code class="code docutils literal notranslate"><span class="pre">int</span></code> and <code class="code docutils literal notranslate"><span class="pre">float</span></code> for integers and floats respectively. This can also be seen from the <code class="code docutils literal notranslate"><span class="pre">int_num</span></code> and <code class="code docutils literal notranslate"><span class="pre">float_num</span></code> attributes.</p>
+<p>In the <code class="code docutils literal notranslate"><span class="pre">update_event</span></code>, we now also set a progress to indicate that our node has started generating the number and that it has finished. Granted, this operation will be really fast and hence won’t be visible in the CogniX Editor or any other GUI implementation for a progress state.</p>
+</section>
+<section id="add-node">
+<h3>Add Node<a class="headerlink" href="#add-node" title="Link to this heading">¶</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">AddNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span><span class="sd">    This is a node that adds two numbers. The numbers can </span>
+<span class="linenos"> 4</span><span class="sd">    be any type of number</span>
+<span class="linenos"> 5</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 6</span>    
+<span class="linenos"> 7</span>    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Add&#39;</span>
+<span class="linenos"> 8</span>    <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;0.1&#39;</span>
+<span class="linenos"> 9</span>    
+<span class="linenos">10</span>    <span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="n">NodeTraitsConfig</span><span class="p">):</span>
+<span class="linenos">11</span>        <span class="n">ports</span><span class="p">:</span> <span class="n">PortList</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span>
+<span class="linenos">12</span>            <span class="n">PortList</span><span class="p">,</span>
+<span class="linenos">13</span>            <span class="k">lambda</span><span class="p">:</span> <span class="n">PortList</span><span class="p">(</span>
+<span class="linenos">14</span>                    <span class="n">list_type</span> <span class="o">=</span> <span class="n">PortList</span><span class="o">.</span><span class="n">ListType</span><span class="o">.</span><span class="n">INPUTS</span><span class="p">,</span>
+<span class="linenos">15</span>                    <span class="n">inp_params</span> <span class="o">=</span> <span class="n">PortList</span><span class="o">.</span><span class="n">Params</span><span class="p">(</span>
+<span class="linenos">16</span>                        <span class="n">allowed_data</span><span class="o">=</span><span class="n">Number</span>    
+<span class="linenos">17</span>                    <span class="p">),</span>
+<span class="linenos">18</span>                <span class="p">)</span>
+<span class="linenos">19</span>        <span class="p">)</span>
+<span class="linenos">20</span>        
+<span class="linenos">21</span>        <span class="k">def</span> <span class="nf">set_ports</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<span class="linenos">22</span>            <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">ports</span> <span class="o">=</span> <span class="n">ports</span>
+<span class="linenos">23</span>        
+<span class="linenos">24</span>    <span class="n">init_outputs</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">25</span>        <span class="n">PortConfig</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="n">allowed_data</span><span class="o">=</span><span class="n">Number</span><span class="p">)</span>
+<span class="linenos">26</span>    <span class="p">]</span>
+<span class="linenos">27</span>    
+<span class="linenos">28</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">,</span> <span class="n">config</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos">29</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+<span class="linenos">30</span>        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">31</span>    
+<span class="linenos">32</span>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">33</span>        <span class="bp">self</span><span class="o">.</span><span class="n">first_res</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">34</span>    
+<span class="linenos">35</span>    <span class="c1"># it&#39;s better to redefine the config for intellisense purposes</span>
+<span class="linenos">36</span>    <span class="nd">@property</span>
+<span class="linenos">37</span>    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Config</span><span class="p">:</span>
+<span class="linenos">38</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span>
+<span class="linenos">39</span>    
+<span class="linenos">40</span>    <span class="k">def</span> <span class="nf">update_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">41</span>        
+<span class="linenos">42</span>        <span class="n">prev_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
+<span class="linenos">43</span>        
+<span class="linenos">44</span>        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">45</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_inputs</span><span class="p">):</span>
+<span class="linenos">46</span>            <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="linenos">47</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span><span class="p">:</span>
+<span class="linenos">48</span>                <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">49</span>            <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">+=</span> <span class="n">val</span>
+</pre></div>
+</div>
+<p>The <code class="code docutils literal notranslate"><span class="pre">AddNode</span></code> now also contains a configuration class, with only one configuration. This configuration allows for easily and dynamically changing the ports of a node. Notice that for this node, we’re only altering the inputs. Thus, we have removed the <code class="code docutils literal notranslate"><span class="pre">init_inputs</span></code> static attribute, since it is no longer needed.</p>
+<p>Our <code class="code docutils literal notranslate"><span class="pre">update_event</span></code> logic is now written for the <code class="code docutils literal notranslate"><span class="pre">AddNode</span></code> to work with an arbitrary number of inputs. We’re also making sure to output a result only if the result is different than a previous iteration. These implementation details might not work for you and you might choose to output the result despite it being the same as a previous iteration. This is specific to the role of the node and the developer behind it.</p>
+<p>Finally, note that we’re also logging the result. This would show in the CogniX Editor, or any other GUI that taps into the logging system of <code class="code docutils literal notranslate"><span class="pre">cognixcore</span></code>.</p>
+</section>
+<section id="id3">
+<h3>Using the nodes<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">cognixcore</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="linenos"> 2</span>    <span class="n">Flow</span><span class="p">,</span>
+<span class="linenos"> 3</span>    <span class="n">Session</span>
+<span class="linenos"> 4</span><span class="p">)</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="linenos"> 7</span><span class="c1"># Register the nodes</span>
+<span class="linenos"> 8</span><span class="n">session</span><span class="o">.</span><span class="n">register_node_types</span><span class="p">([</span><span class="n">NumberNode</span><span class="p">,</span> <span class="n">AddNode</span><span class="p">])</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">flow</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">create_flow</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Example&#39;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># First number node</span>
+<span class="linenos">13</span><span class="n">num_one</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">NumberNode</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">num_one</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;random&#39;</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># second number node</span>
+<span class="linenos">17</span><span class="n">num_two</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">NumberNode</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">num_two</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;int&#39;</span>
+<span class="linenos">19</span><span class="n">num_two</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">int_num</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># add node</span>
+<span class="linenos">22</span><span class="n">add_node</span><span class="p">:</span> <span class="n">AddNode</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">AddNode</span><span class="p">)</span>
+<span class="linenos">23</span><span class="c1"># dynamically change the ports through the port list</span>
+<span class="linenos">24</span><span class="n">add_node</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set_ports</span><span class="p">([</span><span class="s1">&#39;port_one&#39;</span><span class="p">,</span> <span class="s1">&#39;port_two&#39;</span><span class="p">])</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="n">flow</span><span class="o">.</span><span class="n">connect_nodes</span><span class="p">(</span><span class="n">num_one</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">add_node</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">27</span><span class="n">flow</span><span class="o">.</span><span class="n">connect_nodes</span><span class="p">(</span><span class="n">num_two</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">add_node</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="nb">print</span><span class="p">(</span><span class="n">add_node</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, we’re using the nodes in a scripting rather than visual manner. We’re creating a session, registering the nodes and creating a flow. We’re instantiating two <code class="code docutils literal notranslate"><span class="pre">NumberNode</span></code> (s) and one <code class="code docutils literal notranslate"><span class="pre">AddNode</span></code>. The first number node generates a random number while the second outputs the number 25. We’re then making sure that the add node has two ports, which we set dynamically. Finally, we connect the nodes that work through the default <code class="code docutils literal notranslate"><span class="pre">DataFlowNaive</span></code> algorithm.</p>
+<p>Better yet, instead of relying on the <code class="code docutils literal notranslate"><span class="pre">DataFlowNaive</span></code> algorithm, we can evaluate our graph as a Python program, like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">session</span><span class="o">.</span><span class="n">play_flow</span><span class="p">(</span><span class="s1">&#39;Example&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../autoapi/cognixcore/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">cognixcore</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, CogniX
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tutorial</a><ul>
+<li><a class="reference internal" href="#a-good-starting-example">A good starting example</a><ul>
+<li><a class="reference internal" href="#numbernode">NumberNode</a></li>
+<li><a class="reference internal" href="#addnode">AddNode</a></li>
+<li><a class="reference internal" href="#using-the-nodes">Using the nodes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#initializations">Initializations</a><ul>
+<li><a class="reference internal" href="#init">__init__</a></li>
+<li><a class="reference internal" href="#place-event">place_event</a></li>
+<li><a class="reference internal" href="#id2">init</a></li>
+<li><a class="reference internal" href="#stop">stop</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#flow-executors-graph-players">Flow Executors - Graph Players</a><ul>
+<li><a class="reference internal" href="#data-flow">Data Flow</a></li>
+<li><a class="reference internal" href="#data-flow-optimized">Data Flow Optimized</a></li>
+<li><a class="reference internal" href="#exec-flow-naive">Exec Flow Naive</a></li>
+<li><a class="reference internal" href="#manual-flow">Manual Flow</a></li>
+<li><a class="reference internal" href="#graph-player">Graph Player</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#frame-node">Frame Node</a></li>
+<li><a class="reference internal" href="#quality-of-life">Quality of Life</a><ul>
+<li><a class="reference internal" href="#loading-saving">Loading/saving</a></li>
+<li><a class="reference internal" href="#progress-state">Progress State</a></li>
+<li><a class="reference internal" href="#loggers">Loggers</a></li>
+<li><a class="reference internal" href="#variables">Variables</a></li>
+<li><a class="reference internal" href="#node-actions">Node Actions</a></li>
+<li><a class="reference internal" href="#node-configuration">Node Configuration</a><ul>
+<li><a class="reference internal" href="#configuration-by-traits">Configuration by Traits</a></li>
+<li><a class="reference internal" href="#port-list">Port list</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#restful-api">RESTful API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#a-better-example">A better example</a><ul>
+<li><a class="reference internal" href="#number-node">Number Node</a></li>
+<li><a class="reference internal" href="#add-node">Add Node</a></li>
+<li><a class="reference internal" href="#id3">Using the nodes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=175e4471"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
+    </body>
+</html>

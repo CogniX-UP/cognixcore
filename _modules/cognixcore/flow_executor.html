@@ -1,0 +1,871 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>cognixcore.flow_executor - cognixcore v0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">cognixcore v0.9 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">cognixcore v0.9 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoapi/cognixcore/index.html">cognixcore</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of cognixcore</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/cognixcore/addons/index.html">cognixcore.addons</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of cognixcore.addons</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../autoapi/cognixcore/addons/variables/index.html">cognixcore.addons.variables</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of cognixcore.addons.variables</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/cognixcore/addons/variables/builtin/index.html">cognixcore.addons.variables.builtin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/cognixcore/addons/builtin/index.html">cognixcore.addons.builtin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/cognixcore/addons/logging/index.html">cognixcore.addons.logging</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/cognixcore/config/index.html">cognixcore.config</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of cognixcore.config</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/cognixcore/config/traits/index.html">cognixcore.config.traits</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/cognixcore/networking/index.html">cognixcore.networking</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of cognixcore.networking</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/cognixcore/networking/rest_api/index.html">cognixcore.networking.rest_api</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/base/index.html">cognixcore.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/flow/index.html">cognixcore.flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/flow_executor/index.html">cognixcore.flow_executor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/flow_player/index.html">cognixcore.flow_player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/info_msgs/index.html">cognixcore.info_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/models/index.html">cognixcore.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/node/index.html">cognixcore.node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/port/index.html">cognixcore.port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/rc/index.html">cognixcore.rc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/serializers/index.html">cognixcore.serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/session/index.html">cognixcore.session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/utils/index.html">cognixcore.utils</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for cognixcore.flow_executor</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The flow executors are responsible for executing the flow. They have access to</span>
+<span class="sd">the flow as well as the nodes&#39; internals and are able to perform optimizations.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">.port</span> <span class="kn">import</span> <span class="n">NodeOutput</span><span class="p">,</span> <span class="n">NodeInput</span>
+<span class="kn">from</span> <span class="nn">.rc</span> <span class="kn">import</span> <span class="n">FlowAlg</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">.flow</span> <span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Node</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">graph_adjacency = {</span>
+<span class="sd">    node_output: [node_input],    </span>
+<span class="sd">    node_input:  node_output | None</span>
+<span class="sd">}</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="FlowExecutor">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.FlowExecutor">[docs]</a>
+<span class="k">class</span> <span class="nc">FlowExecutor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for special flow execution algorithms.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">:</span> <span class="n">Flow</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flow</span> <span class="o">=</span> <span class="n">flow</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flow_changed</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="FlowExecutor.graph">
+<a class="viewcode-back" href="../../autoapi/cognixcore/flow_executor/index.html#cognixcore.flow_executor.FlowExecutor.graph">[docs]</a>
+    <span class="k">def</span> <span class="nf">graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">graph_adj</span></div>
+
+    
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="FlowExecutor.graph_rev">
+<a class="viewcode-back" href="../../autoapi/cognixcore/flow_executor/index.html#cognixcore.flow_executor.FlowExecutor.graph_rev">[docs]</a>
+    <span class="k">def</span> <span class="nf">graph_rev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">graph_adj_rev</span></div>
+
+    
+    <span class="c1"># Node.update() =&gt;</span>
+<div class="viewcode-block" id="FlowExecutor.update_node">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.FlowExecutor.update_node">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+
+    <span class="c1"># Node.input() =&gt;</span>
+<div class="viewcode-block" id="FlowExecutor.input">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.FlowExecutor.input">[docs]</a>
+    <span class="k">def</span> <span class="nf">input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+
+    <span class="c1"># Node.set_output_val() =&gt;</span>
+<div class="viewcode-block" id="FlowExecutor.set_output">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.FlowExecutor.set_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+
+    <span class="c1"># Node.exec_output() =&gt;</span>
+<div class="viewcode-block" id="FlowExecutor.exec_output">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.FlowExecutor.exec_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">exec_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="FlowExecutor.conn_added">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.FlowExecutor.conn_added">[docs]</a>
+    <span class="k">def</span> <span class="nf">conn_added</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="n">NodeOutput</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="n">NodeInput</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="FlowExecutor.conn_removed">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.FlowExecutor.conn_removed">[docs]</a>
+    <span class="k">def</span> <span class="nf">conn_removed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="n">NodeOutput</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="n">NodeInput</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+</div>
+
+
+<div class="viewcode-block" id="ManualFlow">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ManualFlow">[docs]</a>
+<span class="k">class</span> <span class="nc">ManualFlow</span><span class="p">(</span><span class="n">FlowExecutor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An executor that doesn&#39;t propagate any data between nodes. Doesn&#39;t</span>
+<span class="sd">    handle the exec_output.</span>
+<span class="sd">    </span>
+<span class="sd">    To be used for manual and/or external evaluation of the whole flow graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">:</span> <span class="n">Flow</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs_updated</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">NodeOutput</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        
+<div class="viewcode-block" id="ManualFlow.update_node">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ManualFlow.update_node">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">update_event</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">update_err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="ManualFlow.input">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ManualFlow.input">[docs]</a>
+    <span class="k">def</span> <span class="nf">input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">conn_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_rev</span><span class="p">[</span><span class="n">inp</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">conn_out</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">conn_out</span><span class="o">.</span><span class="n">val</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">inp</span><span class="o">.</span><span class="n">default</span></div>
+
+    
+<div class="viewcode-block" id="ManualFlow.set_output">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ManualFlow.set_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_outputs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">out</span><span class="o">.</span><span class="n">type_</span> <span class="o">==</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs_updated</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">out</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="ManualFlow.should_input_update">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ManualFlow.should_input_update">[docs]</a>
+    <span class="k">def</span> <span class="nf">should_input_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="n">NodeInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">connected_output</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs_updated</span></div>
+
+    
+<div class="viewcode-block" id="ManualFlow.has_updated_outputs">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ManualFlow.has_updated_outputs">[docs]</a>
+    <span class="k">def</span> <span class="nf">has_updated_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">out</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">_outputs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">out</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs_updated</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="ManualFlow.clear_updates">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ManualFlow.clear_updates">[docs]</a>
+    <span class="k">def</span> <span class="nf">clear_updates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs_updated</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+</div>
+
+        
+<div class="viewcode-block" id="DataFlowNaive">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowNaive">[docs]</a>
+<span class="k">class</span> <span class="nc">DataFlowNaive</span><span class="p">(</span><span class="n">FlowExecutor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The naive implementation of data-flow execution. Naive meaning setting a node output</span>
+<span class="sd">    leads to an immediate update in all successors consecutively. No runtime optimization</span>
+<span class="sd">    if performed, and some types of graphs can run really slow here, especially if they</span>
+<span class="sd">    include &quot;diamonds&quot;.</span>
+
+<span class="sd">    Assumptions for the graph:</span>
+<span class="sd">    - no non-terminating feedback loops</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Node.update() =&gt;</span>
+<div class="viewcode-block" id="DataFlowNaive.update_node">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowNaive.update_node">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">update_event</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">update_err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Node.input() =&gt;</span>
+<div class="viewcode-block" id="DataFlowNaive.input">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowNaive.input">[docs]</a>
+    <span class="k">def</span> <span class="nf">input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">conn_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_rev</span><span class="p">[</span><span class="n">inp</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">conn_out</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">conn_out</span><span class="o">.</span><span class="n">val</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">inp</span><span class="o">.</span><span class="n">default</span></div>
+
+
+    <span class="c1"># Node.set_output_val() =&gt;</span>
+<div class="viewcode-block" id="DataFlowNaive.set_output">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowNaive.set_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_outputs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">out</span><span class="o">.</span><span class="n">type_</span> <span class="o">==</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">out</span><span class="p">]:</span>
+            <span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inp</span><span class="o">=</span><span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">inp</span><span class="p">))</span></div>
+
+
+    <span class="c1"># Node.exec_output() =&gt;</span>
+<div class="viewcode-block" id="DataFlowNaive.exec_output">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowNaive.exec_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">exec_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_outputs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">out</span><span class="o">.</span><span class="n">type_</span> <span class="o">==</span> <span class="s1">&#39;exec&#39;</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">out</span><span class="p">]:</span>
+            <span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inp</span><span class="o">=</span><span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">inp</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="DataFlowNaive.conn_added">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowNaive.conn_added">[docs]</a>
+    <span class="k">def</span> <span class="nf">conn_added</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="n">NodeOutput</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="n">NodeInput</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">silent</span><span class="p">:</span>
+            <span class="c1"># update input</span>
+            <span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inp</span><span class="o">=</span><span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">inp</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="DataFlowNaive.conn_removed">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowNaive.conn_removed">[docs]</a>
+    <span class="k">def</span> <span class="nf">conn_removed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">silent</span><span class="p">:</span>
+            <span class="c1"># update input</span>
+            <span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inp</span><span class="o">=</span><span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">inp</span><span class="p">))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DataFlowOptimized">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized">[docs]</a>
+<span class="k">class</span> <span class="nc">DataFlowOptimized</span><span class="p">(</span><span class="n">DataFlowNaive</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    *(see also documentation in Flow)*</span>
+
+<span class="sd">    A special flow executor which implements some node functions to optimise flow execution.</span>
+<span class="sd">    Whenever a new execution is invoked somewhere (some node or output is updated), it</span>
+<span class="sd">    analyses the graph&#39;s connected component (of successors) where the execution was invoked</span>
+<span class="sd">    and creates a few data structures to reverse engineer how many input</span>
+<span class="sd">    updates every node possibly receives in this execution. A node&#39;s outputs are</span>
+<span class="sd">    propagated once no input can still receive new data from a predecessor node.</span>
+<span class="sd">    Therefore, while a node gets updated every time an input receives some data,</span>
+<span class="sd">    every OUTPUT is only updated ONCE.</span>
+<span class="sd">    This implies that every connection is activated at most once in an execution.</span>
+<span class="sd">    This can result in asymptotic speedup in large data flows compared to normal data flow</span>
+<span class="sd">    execution where any two executed branches which merge again in the future result in two</span>
+<span class="sd">    complete executions of everything that comes after the merge, which quickly produces</span>
+<span class="sd">    exponential performance issues.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_updated</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">waiting_count</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_waiting</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_conns_from_predecessors</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_execution_root</span> <span class="o">=</span> <span class="kc">None</span>     <span class="c1"># for reuse when a same execution is invoked many times consecutively</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execution_root</span> <span class="o">=</span> <span class="kc">None</span>          <span class="c1"># can be Node or NodeOutput</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execution_root_node</span> <span class="o">=</span> <span class="kc">None</span>     <span class="c1"># the updated Node or the updated NodeOutput&#39;s Node</span>
+
+    <span class="c1"># NODE FUNCTIONS</span>
+
+    <span class="c1"># Node.update() =&gt;</span>
+<div class="viewcode-block" id="DataFlowOptimized.update_node">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized.update_node">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">inp</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">execution_root_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># execution starter!</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_execution</span><span class="p">(</span><span class="n">root_node</span><span class="o">=</span><span class="n">node</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">invoke_node_update_event</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">inp</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">propagate_outputs</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop_execution</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">invoke_node_update_event</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">inp</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DataFlowOptimized.set_output">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized.set_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_outputs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">execution_root_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># execution starter!</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_execution</span><span class="p">(</span><span class="n">root_output</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+
+            <span class="n">out</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_updated</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">propagate_output</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop_execution</span><span class="p">()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_waiting</span><span class="p">[</span><span class="n">out</span><span class="o">.</span><span class="n">node</span><span class="p">]:</span>
+                <span class="c1"># the output&#39;s node might not be part of the analyzed graph!</span>
+                <span class="c1"># in this case we immediately push the value</span>
+                <span class="c1"># there are other possible solutions to this, including running</span>
+                <span class="c1"># a new execution analysis of this graph here</span>
+
+                <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">data</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">output_updated</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="DataFlowOptimized.exec_output">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized.exec_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">exec_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="c1"># rudimentary exec support also in data flows</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_outputs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">execution_root_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># execution starter!</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_execution</span><span class="p">(</span><span class="n">root_output</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_updated</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">propagate_output</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop_execution</span><span class="p">()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_updated</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Helper methods</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DataFlowOptimized.start_execution">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized.start_execution">[docs]</a>
+    <span class="k">def</span> <span class="nf">start_execution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_node</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">root_output</span><span class="p">:</span> <span class="n">NodeOutput</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="c1"># reset cached output values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_updated</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">out</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">_outputs</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">output_updated</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="n">root_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execution_root</span> <span class="o">=</span> <span class="n">root_node</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execution_root_node</span> <span class="o">=</span> <span class="n">root_node</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">waiting_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_waiting_count</span><span class="p">(</span><span class="n">root_node</span><span class="o">=</span><span class="n">root_node</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">root_output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execution_root</span> <span class="o">=</span> <span class="n">root_output</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execution_root_node</span> <span class="o">=</span> <span class="n">root_output</span><span class="o">.</span><span class="n">node</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">waiting_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_waiting_count</span><span class="p">(</span><span class="n">root_output</span><span class="o">=</span><span class="n">root_output</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DataFlowOptimized.stop_execution">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized.stop_execution">[docs]</a>
+    <span class="k">def</span> <span class="nf">stop_execution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execution_root_node</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_execution_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execution_root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execution_root</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="DataFlowOptimized.generate_waiting_count">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized.generate_waiting_count">[docs]</a>
+    <span class="k">def</span> <span class="nf">generate_waiting_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_node</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">root_output</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow_changed</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">execution_root</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_execution_root</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_conns_from_predecessors</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flow_changed</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">nodes</span>
+        <span class="n">node_successors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">node_successors</span>
+
+        <span class="c1"># DP TABLE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_conns_from_predecessors</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">n</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span>
+        <span class="p">}</span>
+
+        <span class="n">successors</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">n</span><span class="p">:</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span>
+        <span class="p">}</span>
+
+        <span class="c1"># BC</span>
+        <span class="k">if</span> <span class="n">root_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">successors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">root_node</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">root_output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">root_output</span><span class="p">]:</span>
+                <span class="n">connected_node</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">node</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_conns_from_predecessors</span><span class="p">[</span><span class="n">connected_node</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">successors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">connected_node</span><span class="p">)</span>
+
+        <span class="c1"># ITERATION</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">successors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">successors</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">n</span><span class="p">]:</span>
+                <span class="k">continue</span>
+
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">node_successors</span><span class="p">[</span><span class="n">n</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_conns_from_predecessors</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">successors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_waiting</span> <span class="o">=</span> <span class="n">visited</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_conns_from_predecessors</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="DataFlowOptimized.invoke_node_update_event">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized.invoke_node_update_event">[docs]</a>
+    <span class="k">def</span> <span class="nf">invoke_node_update_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">inp</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DataFlowOptimized.decrease_wait">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized.decrease_wait">[docs]</a>
+    <span class="k">def</span> <span class="nf">decrease_wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;decreases the wait count of the node;</span>
+<span class="sd">        if the count reaches zero, which means there is no other input waiting for data,</span>
+<span class="sd">        the output values get propagated&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">waiting_count</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">waiting_count</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">propagate_outputs</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DataFlowOptimized.propagate_outputs">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized.propagate_outputs">[docs]</a>
+    <span class="k">def</span> <span class="nf">propagate_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;propagates all outputs of node&quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">out</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">_outputs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">propagate_output</span><span class="p">(</span><span class="n">out</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DataFlowOptimized.propagate_output">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.DataFlowOptimized.propagate_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">propagate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pushes an output&#39;s value to successors if it has been changed in the execution&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_updated</span><span class="p">[</span><span class="n">out</span><span class="p">]:</span>
+            <span class="c1"># same procedure for data and exec connections</span>
+            <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">out</span><span class="p">]:</span>
+                <span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inp</span><span class="o">=</span><span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">inp</span><span class="p">))</span>
+
+        <span class="c1"># decrease wait count of successors</span>
+        <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">out</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">decrease_wait</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ExecFlowNaive">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ExecFlowNaive">[docs]</a>
+<span class="k">class</span> <span class="nc">ExecFlowNaive</span><span class="p">(</span><span class="n">FlowExecutor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
+
+        <span class="c1"># all the nodes currently updating because of an output data request</span>
+        <span class="c1"># used to prevent redundant predecessor updates during the update</span>
+        <span class="c1"># of a single successor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updated_nodes</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Node.update() = &gt;</span>
+<div class="viewcode-block" id="ExecFlowNaive.update_node">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ExecFlowNaive.update_node">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">inp</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="p">[</span><span class="n">inp</span><span class="p">]</span><span class="o">.</span><span class="n">type_</span> <span class="o">==</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">execution_starter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">updated_nodes</span> <span class="ow">is</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">execution_starter</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">updated_nodes</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">updated_nodes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">update_event</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">update_err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">execution_starter</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">updated_nodes</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+    <span class="c1"># Node.input() =&gt;</span>
+<div class="viewcode-block" id="ExecFlowNaive.input">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ExecFlowNaive.input">[docs]</a>
+    <span class="k">def</span> <span class="nf">input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_rev</span><span class="p">[</span><span class="n">inp</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">out</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">node</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">updated_nodes</span><span class="p">:</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">val</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+    <span class="c1"># Node.set_output_val() =&gt;</span>
+<div class="viewcode-block" id="ExecFlowNaive.set_output">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ExecFlowNaive.set_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_outputs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">data</span></div>
+
+
+    <span class="c1"># Node.exec_output() =&gt;</span>
+<div class="viewcode-block" id="ExecFlowNaive.exec_output">
+<a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ExecFlowNaive.exec_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">exec_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">_outputs</span><span class="p">[</span><span class="n">index</span><span class="p">]]:</span>
+            <span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">inp</span><span class="p">))</span></div>
+</div>
+
+
+<span class="n">__alg_to_exec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">FlowAlg</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">FlowExecutor</span><span class="p">]]</span> <span class="o">=</span><span class="p">{</span>
+    <span class="n">FlowAlg</span><span class="o">.</span><span class="n">MANUAL</span><span class="p">:</span> <span class="n">ManualFlow</span><span class="p">,</span>
+    <span class="n">FlowAlg</span><span class="o">.</span><span class="n">DATA</span><span class="p">:</span> <span class="n">DataFlowNaive</span><span class="p">,</span>
+    <span class="n">FlowAlg</span><span class="o">.</span><span class="n">DATA_OPT</span><span class="p">:</span> <span class="n">DataFlowOptimized</span><span class="p">,</span>
+    <span class="n">FlowAlg</span><span class="o">.</span><span class="n">EXEC</span><span class="p">:</span> <span class="n">ExecFlowNaive</span>
+<span class="p">}</span>
+
+<span class="n">__exec_to_alg</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">FlowExecutor</span><span class="p">],</span> <span class="n">FlowAlg</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">exec_type</span><span class="p">:</span> <span class="n">alg</span> <span class="k">for</span> <span class="n">alg</span><span class="p">,</span> <span class="n">exec_type</span> <span class="ow">in</span> <span class="n">__alg_to_exec</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">}</span>
+
+<div class="viewcode-block" id="executor_from_flow_alg">
+<a class="viewcode-back" href="../../autoapi/cognixcore/flow_executor/index.html#cognixcore.flow_executor.executor_from_flow_alg">[docs]</a>
+<span class="k">def</span> <span class="nf">executor_from_flow_alg</span><span class="p">(</span><span class="n">algorithm</span><span class="p">:</span> <span class="n">FlowAlg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">__alg_to_exec</span><span class="p">[</span><span class="n">algorithm</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="flow_alg_from_executor">
+<a class="viewcode-back" href="../../autoapi/cognixcore/flow_executor/index.html#cognixcore.flow_executor.flow_alg_from_executor">[docs]</a>
+<span class="k">def</span> <span class="nf">flow_alg_from_executor</span><span class="p">(</span><span class="n">exec_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">FlowExecutor</span><span class="p">]):</span>
+    <span class="k">return</span> <span class="n">__exec_to_alg</span><span class="p">[</span><span class="n">exec_type</span><span class="p">]</span></div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, CogniX
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=175e4471"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
+    </body>
+</html>

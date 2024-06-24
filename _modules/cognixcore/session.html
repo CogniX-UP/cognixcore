@@ -1,0 +1,888 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>cognixcore.session - cognixcore v0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">cognixcore v0.9 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">cognixcore v0.9 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoapi/cognixcore/index.html">cognixcore</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of cognixcore</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/cognixcore/addons/index.html">cognixcore.addons</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of cognixcore.addons</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../autoapi/cognixcore/addons/variables/index.html">cognixcore.addons.variables</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of cognixcore.addons.variables</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/cognixcore/addons/variables/builtin/index.html">cognixcore.addons.variables.builtin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/cognixcore/addons/builtin/index.html">cognixcore.addons.builtin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/cognixcore/addons/logging/index.html">cognixcore.addons.logging</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/cognixcore/config/index.html">cognixcore.config</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of cognixcore.config</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/cognixcore/config/traits/index.html">cognixcore.config.traits</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/cognixcore/networking/index.html">cognixcore.networking</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of cognixcore.networking</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/cognixcore/networking/rest_api/index.html">cognixcore.networking.rest_api</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/base/index.html">cognixcore.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/flow/index.html">cognixcore.flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/flow_executor/index.html">cognixcore.flow_executor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/flow_player/index.html">cognixcore.flow_player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/info_msgs/index.html">cognixcore.info_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/models/index.html">cognixcore.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/node/index.html">cognixcore.node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/port/index.html">cognixcore.port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/rc/index.html">cognixcore.rc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/serializers/index.html">cognixcore.serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/session/index.html">cognixcore.session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/cognixcore/utils/index.html">cognixcore.utils</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for cognixcore.session</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">Event</span><span class="p">,</span> <span class="n">IdentifiableGroups</span>
+<span class="kn">from</span> <span class="nn">.flow</span> <span class="kn">import</span> <span class="n">Flow</span>
+<span class="kn">from</span> <span class="nn">.info_msgs</span> <span class="kn">import</span> <span class="n">InfoMsgs</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">pkg_version</span><span class="p">,</span> <span class="n">pkg_path</span><span class="p">,</span> <span class="n">print_err</span><span class="p">,</span> <span class="n">get_mod_classes</span>
+<span class="kn">from</span> <span class="nn">.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">.addons._base</span> <span class="kn">import</span> <span class="n">AddOn</span><span class="p">,</span> <span class="n">AddonType</span>
+<span class="kn">from</span> <span class="nn">.addons.builtin</span> <span class="kn">import</span> <span class="n">VarsAddon</span><span class="p">,</span> <span class="n">LoggingAddon</span>
+<span class="kn">from</span> <span class="nn">.flow_player</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">GraphPlayer</span><span class="p">,</span>
+    <span class="n">GraphState</span><span class="p">,</span>
+    <span class="n">GraphActionResponse</span><span class="p">,</span>
+    <span class="n">FlowPlayer</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.networking.rest_api</span> <span class="kn">import</span> <span class="n">SessionServer</span>
+
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span><span class="p">,</span> <span class="n">Future</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MappingProxyType</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">Logger</span>
+
+<div class="viewcode-block" id="Session">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session">[docs]</a>
+<span class="k">class</span> <span class="nc">Session</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Session is the top level interface to your project. It mainly manages flows, nodes, and add-ons and</span>
+<span class="sd">    provides methods for serialization and deserialization of the project.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Session.version">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.version">[docs]</a>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">pkg_version</span><span class="p">()</span></div>
+
+    
+    <span class="n">_flow_base_type</span> <span class="o">=</span> <span class="n">Flow</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Forces the Session to accept a specific type of base Flow.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">gui</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="n">load_optional_addons</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">Base</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># events</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flow_created</span> <span class="o">=</span> <span class="n">Event</span><span class="p">[</span><span class="n">Flow</span><span class="p">]()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flow_renamed</span> <span class="o">=</span> <span class="n">Event</span><span class="p">[</span><span class="n">Flow</span><span class="p">,</span> <span class="nb">str</span><span class="p">]()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flow_deleted</span> <span class="o">=</span> <span class="n">Event</span><span class="p">[</span><span class="n">Flow</span><span class="p">]()</span>
+        
+        <span class="c1"># ATTRIBUTES</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AddOn</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addons_proxy</span> <span class="o">=</span> <span class="n">MappingProxyType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addons_by_type</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="n">AddOn</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+         
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Flow</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flows_proxy</span> <span class="o">=</span> <span class="n">MappingProxyType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flows</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">invis_node_types</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Node</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">gui</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">gui</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_data</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># node group</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_node_type_groups</span> <span class="o">=</span> <span class="n">IdentifiableGroups</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Node</span><span class="p">]]()</span>
+        
+        <span class="c1"># Load Variables and Logging Addons</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_addon</span><span class="p">(</span><span class="n">VarsAddon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_addon</span><span class="p">(</span><span class="n">LoggingAddon</span><span class="p">)</span>
+        
+        <span class="c1"># Load optional built-in addons</span>
+        <span class="k">if</span> <span class="n">load_optional_addons</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.addons.builtin</span> <span class="kn">import</span> <span class="n">built_in_addons</span>
+            <span class="k">for</span> <span class="n">addon_type</span> <span class="ow">in</span> <span class="n">built_in_addons</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">register_addon</span><span class="p">(</span><span class="n">addon_type</span><span class="p">)</span>
+        
+        <span class="c1"># players</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_graphs_playing</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">GraphPlayer</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_graph_executor</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_to_future</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Future</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rest_api</span> <span class="o">=</span> <span class="n">SessionServer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Session.vars_addon">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.vars_addon">[docs]</a>
+    <span class="k">def</span> <span class="nf">vars_addon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VarsAddon</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">addon</span><span class="p">(</span><span class="n">VarsAddon</span><span class="p">)</span></div>
+
+    
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Session.logg_addon">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.logg_addon">[docs]</a>
+    <span class="k">def</span> <span class="nf">logg_addon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LoggingAddon</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">addon</span><span class="p">(</span><span class="n">LoggingAddon</span><span class="p">)</span></div>
+
+    
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Session.logger">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.logger">[docs]</a>
+    <span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Logger</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">addon</span><span class="p">(</span><span class="n">LoggingAddon</span><span class="p">)</span><span class="o">.</span><span class="n">root_looger</span></div>
+
+    
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Session.node_types">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.node_types">[docs]</a>
+    <span class="k">def</span> <span class="nf">node_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Node</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node_type_groups</span><span class="o">.</span><span class="n">infos</span></div>
+
+    
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Session.addons">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.addons">[docs]</a>
+    <span class="k">def</span> <span class="nf">addons</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AddOn</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons_proxy</span></div>
+
+    
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Session.flows">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.flows">[docs]</a>
+    <span class="k">def</span> <span class="nf">flows</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Flow</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flows_proxy</span></div>
+
+    
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Session.node_groups">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.node_groups">[docs]</a>
+    <span class="k">def</span> <span class="nf">node_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IdentifiableGroups</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Node</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The identifiables of Node types groupped by their id prefix. If it doesn&#39;t exist, the key is global&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node_type_groups</span></div>
+
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Session.rest_api">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.rest_api">[docs]</a>
+    <span class="k">def</span> <span class="nf">rest_api</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionServer</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rest_api</span></div>
+
+    
+<div class="viewcode-block" id="Session.graph_player">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.graph_player">[docs]</a>
+    <span class="k">def</span> <span class="nf">graph_player</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GraphPlayer</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A proxy to the graph players dictionary contained in the session&quot;&quot;&quot;</span>
+        <span class="n">flow</span><span class="p">:</span> <span class="n">Flow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">flow</span><span class="o">.</span><span class="n">player</span> <span class="k">if</span> <span class="n">flow</span> <span class="k">else</span> <span class="kc">None</span></div>
+
+    
+    <span class="c1"># TODO: Think of an importing solution for external addons</span>
+    <span class="c1"># def load_addons(self, location: str | None = None):</span>
+    <span class="c1">#     &quot;&quot;&quot;Loads all addons found in every module inside the given directory&quot;&quot;&quot;</span>
+        
+    <span class="c1">#     pkg_loc = location if location else pkg_path(&#39;addons/&#39;)</span>
+    <span class="c1">#     addons = filter(lambda p: not p.endswith(&#39;__init__.py&#39;), glob.glob(pkg_loc + &#39;/*.py&#39;))</span>
+        
+    <span class="c1">#     for path in addons:</span>
+    <span class="c1">#         mod_name = basename(path).removesuffix(&#39;.py&#39;)</span>
+    <span class="c1">#         self.import_mod_addons(mod_name)</span>
+
+<div class="viewcode-block" id="Session.import_mod_addons">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.import_mod_addons">[docs]</a>
+    <span class="k">def</span> <span class="nf">import_mod_addons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mod_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">package_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Imports all addons found in a specific module using importlib import_module&quot;&quot;&quot;</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">addon_mod</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">mod_name</span><span class="p">,</span> <span class="n">package_name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">InfoMsgs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+            <span class="k">return</span>
+        
+        <span class="k">def</span> <span class="nf">addon_class_filter</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">AddOn</span><span class="p">)</span> <span class="ow">and</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">!=</span> <span class="n">AddOn</span>
+        
+        <span class="n">mod_addons</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">AddOn</span><span class="p">]]</span> <span class="o">=</span> <span class="n">get_mod_classes</span><span class="p">(</span><span class="n">addon_mod</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="n">addon_class_filter</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">addon_type</span> <span class="ow">in</span> <span class="n">mod_addons</span><span class="p">:</span>
+            <span class="n">addon_name</span> <span class="o">=</span> <span class="n">addon_type</span><span class="o">.</span><span class="n">addon_name</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">addon_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">:</span>
+                <span class="n">InfoMsgs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Addon with name </span><span class="si">{</span><span class="n">addon_name</span><span class="si">}</span><span class="s2"> has already been registered!&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+            
+            <span class="n">addon</span> <span class="o">=</span> <span class="n">addon_type</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_addon</span><span class="p">(</span><span class="n">addon</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="Session.addon">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.addon">[docs]</a>
+    <span class="k">def</span> <span class="nf">addon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">AddonType</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AddonType</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons_by_type</span><span class="p">[</span><span class="n">t</span><span class="p">]</span></div>
+
+      
+<div class="viewcode-block" id="Session.register_addon">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.register_addon">[docs]</a>
+    <span class="k">def</span> <span class="nf">register_addon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addon</span><span class="p">:</span> <span class="n">AddOn</span> <span class="o">|</span> <span class="nb">type</span><span class="p">[</span><span class="n">AddOn</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Registers an addon&quot;&quot;&quot;</span>
+        
+        <span class="n">addon_name</span> <span class="o">=</span> <span class="n">addon</span><span class="o">.</span><span class="n">addon_name</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">addon</span><span class="o">.</span><span class="n">addon_name</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">addon</span><span class="p">,</span> <span class="n">AddOn</span><span class="p">):</span>
+            <span class="n">addon</span> <span class="o">=</span> <span class="n">addon</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">[</span><span class="n">addon_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">addon</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addons_by_type</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">addon</span><span class="p">)]</span> <span class="o">=</span> <span class="n">addon</span>
+        <span class="n">addon</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Session.unregister_addon">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.unregister_addon">[docs]</a>
+    <span class="k">def</span> <span class="nf">unregister_addon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addon</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">AddOn</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Unregisters an addon&quot;&quot;&quot;</span>
+        <span class="n">addon_name</span> <span class="o">=</span> <span class="n">addon</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">addon</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">addon</span><span class="o">.</span><span class="n">addon_name</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">addon_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">:</span>
+            <span class="n">to_remove</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">[</span><span class="n">addon_name</span><span class="p">]</span>
+            <span class="n">to_remove</span><span class="o">.</span><span class="n">unregister</span><span class="p">()</span>
+            
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">[</span><span class="n">addon_name</span><span class="p">]</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons_by_type</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">to_remove</span><span class="p">)]</span></div>
+
+
+
+<div class="viewcode-block" id="Session.register_node_types">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.register_node_types">[docs]</a>
+    <span class="k">def</span> <span class="nf">register_node_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_types</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Node</span><span class="p">]]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registers a list of Nodes which then become available in the flows.</span>
+<span class="sd">        Do not attempt to place nodes in flows that haven&#39;t been registered in the session before.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">node_types</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_node_type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Session.register_node_type">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.register_node_type">[docs]</a>
+    <span class="k">def</span> <span class="nf">register_node_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">Node</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registers a single node.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node_class</span><span class="o">.</span><span class="n">build_identifiable</span><span class="p">()</span> <span class="c1"># if it was modified externally</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_node_type_groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node_class</span><span class="o">.</span><span class="n">identifiable</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="Session.unregister_node_type">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.unregister_node_type">[docs]</a>
+    <span class="k">def</span> <span class="nf">unregister_node_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">Node</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unregisters a node which will then be removed from the available list.</span>
+<span class="sd">        Existing instances won&#39;t be affected.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_node_type_groups</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">node_class</span><span class="o">.</span><span class="n">identifiable</span><span class="p">())</span></div>
+
+     
+                
+<div class="viewcode-block" id="Session.all_node_objects">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.all_node_objects">[docs]</a>
+    <span class="k">def</span> <span class="nf">all_node_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Node</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of all node objects instantiated in any flow.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">nodes</span><span class="p">]</span></div>
+
+        
+        
+<div class="viewcode-block" id="Session.create_flow">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.create_flow">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_flow</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+        <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">player_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">GraphPlayer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Flow</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates and returns a new flow.</span>
+<span class="sd">        If data is provided the title parameter will be ignored.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">flow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flow_base_type</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">player</span> <span class="o">=</span> <span class="n">player_type</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="n">frames</span><span class="p">)</span> <span class="k">if</span> <span class="n">player_type</span> <span class="k">else</span> <span class="n">FlowPlayer</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">flow</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        
+        <span class="n">flow</span><span class="o">.</span><span class="n">player</span> <span class="o">=</span> <span class="n">player</span>
+        <span class="n">player</span><span class="o">.</span><span class="n">flow</span> <span class="o">=</span> <span class="n">flow</span>
+        
+        <span class="c1"># Titles should be unique</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_flow_title_valid</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">title</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span><span class="p">[</span><span class="n">flow</span><span class="o">.</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <span class="n">flow</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">flow_created</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">flow</span></div>
+
+
+
+<div class="viewcode-block" id="Session.rename_flow">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.rename_flow">[docs]</a>
+    <span class="k">def</span> <span class="nf">rename_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">:</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renames an existing flow and returns success boolean.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_flow_title_valid</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span><span class="p">[</span><span class="n">flow</span><span class="o">.</span><span class="n">title</span><span class="p">]</span>
+            <span class="n">old_title</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">title</span>
+            <span class="n">flow</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span><span class="p">[</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <span class="n">flow</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flow_renamed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
+            <span class="n">flow</span><span class="o">.</span><span class="n">renamed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">old_title</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">success</span></div>
+
+
+
+<div class="viewcode-block" id="Session.new_flow_title_valid">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.new_flow_title_valid">[docs]</a>
+    <span class="k">def</span> <span class="nf">new_flow_title_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether a considered title for a new flow is valid (unique) or not.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">title</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span></div>
+
+
+
+<div class="viewcode-block" id="Session.delete_flow">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.delete_flow">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">:</span> <span class="n">Flow</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes an existing flow.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="n">flow</span><span class="o">.</span><span class="n">title</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span> <span class="ow">or</span> <span class="n">flow</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span><span class="p">[</span><span class="n">flow</span><span class="o">.</span><span class="n">title</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span><span class="p">[</span><span class="n">flow</span><span class="o">.</span><span class="n">title</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flow_deleted</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+    <span class="c1"># Player Evaluation</span>
+    
+<div class="viewcode-block" id="Session.play_flow">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.play_flow">[docs]</a>
+    <span class="k">def</span> <span class="nf">play_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">on_other_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">GraphActionResponse</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plays the flow through the graph player&quot;&quot;&quot;</span>
+        
+        <span class="n">graph_player</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_player</span><span class="p">(</span><span class="n">flow_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph_player</span><span class="p">:</span>
+            <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">NO_GRAPH</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;No flow associated with name </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="n">graph_player</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphs_playing</span> <span class="ow">or</span> <span class="n">graph_player</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">GraphState</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">:</span>
+            <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">NOT_ALLOWED</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2"> is currently playing&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="n">graph_player</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">GraphState</span><span class="o">.</span><span class="n">PAUSED</span><span class="p">:</span>
+            <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">NOT_ALLOWED</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2"> is paused&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="c1"># To avoid any race conditions because we may start the flow in another thread</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_graphs_playing</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">graph_player</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">callback</span><span class="p">:</span>
+            <span class="n">graph_player</span><span class="o">.</span><span class="n">graph_events</span><span class="o">.</span><span class="n">sub_event</span><span class="p">(</span>
+                <span class="n">GraphState</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">,</span>
+                <span class="k">lambda</span><span class="p">:</span> <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2"> is playing!&quot;</span><span class="p">),</span>
+                <span class="n">one_off</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">on_other_thread</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__play_flow</span><span class="p">(</span><span class="n">flow_name</span><span class="p">,</span> <span class="n">graph_player</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">play_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__play_flow</span><span class="p">,</span> <span class="n">flow_name</span><span class="p">,</span> <span class="n">graph_player</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_flow_to_future</span><span class="p">[</span><span class="n">flow_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">play_task</span></div>
+
+            
+    
+    <span class="k">def</span> <span class="nf">__play_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">graph_player</span><span class="p">:</span> <span class="n">GraphPlayer</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">graph_player</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graphs_playing</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_graphs_playing</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">graph_player</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">graph_player</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">e</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_graphs_playing</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">graph_player</span><span class="p">)</span>
+            <span class="c1"># handles the case where we have threads</span>
+            <span class="k">if</span> <span class="n">flow_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flow_to_future</span><span class="p">:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flow_to_future</span><span class="p">[</span><span class="n">flow_name</span><span class="p">]</span>
+     
+<div class="viewcode-block" id="Session.pause_flow">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.pause_flow">[docs]</a>
+    <span class="k">def</span> <span class="nf">pause_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">GraphActionResponse</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pauses the graph player&quot;&quot;&quot;</span>
+        
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_player</span><span class="p">(</span><span class="n">flow_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span> <span class="ow">and</span> <span class="n">callback</span><span class="p">:</span>
+            <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">NO_GRAPH</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;No flow associated with name </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">GraphState</span><span class="o">.</span><span class="n">PAUSED</span> <span class="ow">and</span> <span class="n">callback</span><span class="p">:</span>
+            <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">NOT_ALLOWED</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2"> already paused&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">GraphState</span><span class="o">.</span><span class="n">STOPPED</span> <span class="ow">and</span> <span class="n">callback</span><span class="p">:</span>
+            <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">NOT_ALLOWED</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2"> isn&#39;t playing&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="n">callback</span><span class="p">:</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">graph_events</span><span class="o">.</span><span class="n">sub_event</span><span class="p">(</span>
+                <span class="n">GraphState</span><span class="o">.</span><span class="n">PAUSED</span><span class="p">,</span> 
+                <span class="k">lambda</span><span class="p">:</span> <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2"> has paused&quot;</span><span class="p">),</span>
+                <span class="n">one_off</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+        
+        <span class="n">graph</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="Session.resume_flow">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.resume_flow">[docs]</a>
+    <span class="k">def</span> <span class="nf">resume_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">GraphActionResponse</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_player</span><span class="p">(</span><span class="n">flow_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span> <span class="ow">and</span> <span class="n">callback</span><span class="p">:</span>
+            <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">NO_GRAPH</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;No flow associated with name </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="n">GraphState</span><span class="o">.</span><span class="n">PAUSED</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">:</span>
+            <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">NO_GRAPH</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2"> is not paused&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">callback</span><span class="p">:</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">graph_events</span><span class="o">.</span><span class="n">sub_event</span><span class="p">(</span>
+                <span class="n">GraphState</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">,</span>
+                <span class="k">lambda</span><span class="p">:</span> <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2"> resumted&quot;</span><span class="p">),</span>
+                <span class="n">one_off</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+        
+        <span class="n">graph</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="Session.stop_flow">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.stop_flow">[docs]</a>
+    <span class="k">def</span> <span class="nf">stop_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">GraphActionResponse</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stops the graph player&quot;&quot;&quot;</span>
+        
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_player</span><span class="p">(</span><span class="n">flow_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">callback</span><span class="p">:</span>
+                <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">NO_GRAPH</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;No flow associated with name </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="n">GraphState</span><span class="o">.</span><span class="n">PLAYING</span> <span class="ow">and</span> <span class="n">callback</span><span class="p">:</span>
+            <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">NOT_ALLOWED</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2"> is not playing!&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="n">callback</span><span class="p">:</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">graph_events</span><span class="o">.</span><span class="n">sub_event</span><span class="p">(</span>
+                <span class="n">GraphState</span><span class="o">.</span><span class="n">STOPPED</span><span class="p">,</span>
+                <span class="k">lambda</span><span class="p">:</span> <span class="n">callback</span><span class="p">(</span><span class="n">GraphActionResponse</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow </span><span class="si">{</span><span class="n">flow_name</span><span class="si">}</span><span class="s2"> has stopped&quot;</span><span class="p">),</span>
+                <span class="n">one_off</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+            
+        <span class="n">graph</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="Session.shutdown">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.shutdown">[docs]</a>
+    <span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="c1"># shut down any players</span>
+        <span class="k">for</span> <span class="n">flow_title</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">flows</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop_flow</span><span class="p">(</span><span class="n">flow_title</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_graph_executor</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+        
+        <span class="c1"># shut down the rest api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rest_api</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span></div>
+
+        
+               
+    <span class="k">def</span> <span class="nf">_info_messenger</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a reference to InfoMsgs to print info data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">InfoMsgs</span>
+
+
+<div class="viewcode-block" id="Session.load">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.load">[docs]</a>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Flow</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads a project and raises an exception if required nodes are missing</span>
+<span class="sd">        (not registered).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_data</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="c1"># load flows</span>
+        <span class="n">new_flows</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">flows_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;flows&#39;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">flow_data</span> <span class="ow">in</span> <span class="n">flows_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">new_flows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_flow</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">flow_data</span><span class="p">))</span>
+
+        <span class="c1"># load addons</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">addon_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;addons&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">addon_data</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;found missing addon: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">; attempting to load anyway&#39;</span><span class="p">)</span>
+                
+        <span class="k">return</span> <span class="n">new_flows</span></div>
+
+
+<div class="viewcode-block" id="Session.serialize">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.serialize">[docs]</a>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the project as JSON compatible dict to be saved and</span>
+<span class="sd">        loaded again using load()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">complete_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="Session.data">
+<a class="viewcode-back" href="../../autoapi/cognixcore/session/index.html#cognixcore.Session.data">[docs]</a>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Serializes the project&#39;s abstract state into a JSON compatible</span>
+<span class="sd">        dict. Pass to :code:`load()` in a new session to restore.</span>
+<span class="sd">        Don&#39;t use this function for saving, use :code:`serialize()` in</span>
+<span class="sd">        order to include the effects of :code:`Base.complete_data()`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="o">**</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(),</span>
+            <span class="s1">&#39;flows&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">title</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flows</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;addons&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">name</span><span class="p">:</span> <span class="n">addon</span><span class="o">.</span><span class="n">data</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">addon</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addons</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">}</span></div>
+</div>
+
+        
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, CogniX
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=175e4471"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
+    </body>
+</html>

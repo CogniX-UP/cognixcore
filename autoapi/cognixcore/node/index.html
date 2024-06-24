@@ -1,0 +1,1084 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="cognixcore.port" href="../port/index.html" /><link rel="prev" title="cognixcore.models" href="../models/index.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>cognixcore.node - cognixcore v0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">cognixcore v0.9 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">cognixcore v0.9 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">cognixcore</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of cognixcore</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../addons/index.html">cognixcore.addons</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of cognixcore.addons</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../addons/variables/index.html">cognixcore.addons.variables</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of cognixcore.addons.variables</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../addons/variables/builtin/index.html">cognixcore.addons.variables.builtin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../addons/builtin/index.html">cognixcore.addons.builtin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../addons/logging/index.html">cognixcore.addons.logging</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../config/index.html">cognixcore.config</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of cognixcore.config</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../config/traits/index.html">cognixcore.config.traits</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../networking/index.html">cognixcore.networking</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of cognixcore.networking</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../networking/rest_api/index.html">cognixcore.networking.rest_api</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../base/index.html">cognixcore.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flow/index.html">cognixcore.flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flow_executor/index.html">cognixcore.flow_executor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flow_player/index.html">cognixcore.flow_player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../info_msgs/index.html">cognixcore.info_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/index.html">cognixcore.models</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">cognixcore.node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../port/index.html">cognixcore.port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rc/index.html">cognixcore.rc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializers/index.html">cognixcore.serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session/index.html">cognixcore.session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/index.html">cognixcore.utils</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../_sources/autoapi/cognixcore/node/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-cognixcore.node">
+<span id="cognixcore-node"></span><h1>cognixcore.node<a class="headerlink" href="#module-cognixcore.node" title="Link to this heading">¶</a></h1>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cognixcore.node.NodeType" title="cognixcore.node.NodeType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NodeType</span></code></a></p></td>
+<td><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code> for describing node types in a generic way</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cognixcore.node.Node" title="cognixcore.node.Node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Node</span></code></a></p></td>
+<td><p>Base class for all node blueprints. Such a blueprint is made by subclassing this class and registering that subclass</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cognixcore.node.FrameNode" title="cognixcore.node.FrameNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FrameNode</span></code></a></p></td>
+<td><p>A node which updates every frame, where frame is defined by a <a class="reference internal" href="../flow_player/index.html#cognixcore.flow_player.GraphPlayer" title="cognixcore.flow_player.GraphPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.flow_player.GraphPlayer</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cognixcore.node.NodeAction" title="cognixcore.node.NodeAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NodeAction</span></code></a></p></td>
+<td><p>A wrapper for defining an action that can happen for the node</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cognixcore.node.GenericNodeAction" title="cognixcore.node.GenericNodeAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericNodeAction</span></code></a></p></td>
+<td><p>A generic node action that takes another method and wraps it</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cognixcore.node.node_from_identifier" title="cognixcore.node.node_from_identifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_from_identifier</span></code></a>(id, nodes)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cognixcore.node.get_node_classes" title="cognixcore.node.get_node_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node_classes</span></code></a>(modname[, to_fill, base_type])</p></td>
+<td><p>Returns a list of node types defined in the current module that are not abstract</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cognixcore.node.get_versioned_nodes" title="cognixcore.node.get_versioned_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_versioned_nodes</span></code></a>(modname[, to_fill, base_type])</p></td>
+<td><p>Returns a list of node types defined in the current module that are not</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cognixcore.node.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../flow/index.html#cognixcore.flow.Flow" title="cognixcore.flow.Flow"><span class="pre">cognixcore.flow.Flow</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../config/index.html#cognixcore.config.NodeConfig" title="cognixcore.config.NodeConfig"><span class="pre">cognixcore.config.NodeConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base/index.html#cognixcore.base.Base" title="cognixcore.base.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cognixcore.base.Base</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Base class for all node blueprints. Such a blueprint is made by subclassing this class and registering that subclass
+in the session. Actual node objects are instances of it. The node’s static properties are static attributes.
+Refer to python’s static class attributes behavior.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.Node.id_name">
+<span class="sig-name descname"><span class="pre">id_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.id_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.id_name" title="Link to this definition">¶</a></dt>
+<dd><p>The name of the node type. The class name will be used if left empty</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.Node.id_prefix">
+<span class="sig-name descname"><span class="pre">id_prefix</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(None,)</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.id_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.id_prefix" title="Link to this definition">¶</a></dt>
+<dd><p>The prefix of the node type.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.Node.legacy_ids">
+<span class="sig-name descname"><span class="pre">legacy_ids</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.legacy_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.legacy_ids" title="Link to this definition">¶</a></dt>
+<dd><p>{prefix}.{name}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Legacy ids. Must include the whole id</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.Node.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.title"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.title" title="Link to this definition">¶</a></dt>
+<dd><p>the node’s title</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.Node.tags">
+<span class="sig-name descname"><span class="pre">tags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.tags" title="Link to this definition">¶</a></dt>
+<dd><p>a list of tag strings, often useful for searching etc.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.Node.version">
+<span class="sig-name descname"><span class="pre">version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.version" title="Link to this definition">¶</a></dt>
+<dd><p>version tag, use it! In the context of CogniX, all usable
+nodes must have a version, otherwise they’re hidden. This
+applies only in Cognix, not in cognixcore.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.Node.init_inputs">
+<span class="sig-name descname"><span class="pre">init_inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../port/index.html#cognixcore.port.PortConfig" title="cognixcore.port.PortConfig"><span class="pre">cognixcore.port.PortConfig</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.init_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.init_inputs" title="Link to this definition">¶</a></dt>
+<dd><p>list of node input types determining the initial inputs</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.Node.init_outputs">
+<span class="sig-name descname"><span class="pre">init_outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../port/index.html#cognixcore.port.PortConfig" title="cognixcore.port.PortConfig"><span class="pre">cognixcore.port.PortConfig</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.init_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.init_outputs" title="Link to this definition">¶</a></dt>
+<dd><p>initial outputs list, see <code class="docutils literal notranslate"><span class="pre">init_inputs</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.Node.inner_config_type">
+<span class="sig-name descname"><span class="pre">inner_config_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../config/index.html#cognixcore.config.NodeConfig" title="cognixcore.config.NodeConfig"><span class="pre">cognixcore.config.NodeConfig</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.inner_config_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.inner_config_type" title="Link to this definition">¶</a></dt>
+<dd><p>A nested class named Config can be defined to avoid setting the config_type.
+It will be used if the config_type is not defined.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.build_identifiable">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build_identifiable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.build_identifiable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.build_identifiable" title="Link to this definition">¶</a></dt>
+<dd><p>Builds the internal identifiable that helps group nodes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.id">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.id" title="Link to this definition">¶</a></dt>
+<dd><p>Shortcut for Node.identifiale.id()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.identifiable">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">identifiable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base/index.html#cognixcore.base.Identifiable" title="cognixcore.base.Identifiable"><span class="pre">cognixcore.base.Identifiable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cognixcore.node.Node" title="cognixcore.node.Node"><span class="pre">Node</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.identifiable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.identifiable" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.__init_subclass__">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__init_subclass__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.__init_subclass__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.__init_subclass__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.type_to_data">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type_to_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.type_to_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.type_to_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.node.Node.num_inputs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_inputs</span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.num_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.num_inputs" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">The</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">input</span> <span class="pre">ports.</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.node.Node.num_outputs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_outputs</span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.num_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.num_outputs" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">The</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">output</span> <span class="pre">ports</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.node.Node.actions">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">actions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../base/index.html#cognixcore.base.IdentifiableGroups" title="cognixcore.base.IdentifiableGroups"><span class="pre">cognixcore.base.IdentifiableGroups</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cognixcore.node.NodeAction" title="cognixcore.node.NodeAction"><span class="pre">NodeAction</span></a><span class="p"><span class="pre">]</span></span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.actions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.actions" title="Link to this definition">¶</a></dt>
+<dd><p>The actions of this node.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.node.Node.config">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../config/index.html#cognixcore.config.NodeConfig" title="cognixcore.config.NodeConfig"><span class="pre">cognixcore.config.NodeConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.config" title="Link to this definition">¶</a></dt>
+<dd><p>Returns this node’s configuration, if it exists</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.node.Node.player">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">player</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../flow_player/index.html#cognixcore.flow_player.GraphPlayer" title="cognixcore.flow_player.GraphPlayer"><span class="pre">cognixcore.flow_player.GraphPlayer</span></a></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.player"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.player" title="Link to this definition">¶</a></dt>
+<dd><p>A player that for the evaluation of the node.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.node.Node.logger">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logging.Logger</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.logger" title="Link to this definition">¶</a></dt>
+<dd><p>The logger associated with this node, if it exists.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.node.Node.vars_addon">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vars_addon</span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.vars_addon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.vars_addon" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">The</span> <span class="pre">variables</span> <span class="pre">addon</span> <span class="pre">associated</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">flow</span> <span class="pre">that</span> <span class="pre">the</span> <span class="pre">node</span> <span class="pre">is</span> <span class="pre">currently</span> <span class="pre">in.</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.var_val">
+<span class="sig-name descname"><span class="pre">var_val</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.var_val"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.var_val" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the value of a variable</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.var_val_get">
+<span class="sig-name descname"><span class="pre">var_val_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.var_val_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.var_val_get" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the value of a variable. Returns None if it doesn’t exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.set_var_val">
+<span class="sig-name descname"><span class="pre">set_var_val</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.set_var_val"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.set_var_val" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the value of a variable</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.set_config">
+<span class="sig-name descname"><span class="pre">set_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../config/index.html#cognixcore.config.NodeConfig" title="cognixcore.config.NodeConfig"><span class="pre">cognixcore.config.NodeConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">silent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.set_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.set_config" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.add_action">
+<span class="sig-name descname"><span class="pre">add_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cognixcore.node.NodeAction" title="cognixcore.node.NodeAction"><span class="pre">NodeAction</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cognixcore.node.NodeAction" title="cognixcore.node.NodeAction"><span class="pre">NodeAction</span></a></span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.add_action"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.add_action" title="Link to this definition">¶</a></dt>
+<dd><p>Adds an action and groups it under a group</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.add_generic_action">
+<span class="sig-name descname"><span class="pre">add_generic_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invoke</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.add_generic_action"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.add_generic_action" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.after_placement">
+<span class="sig-name descname"><span class="pre">after_placement</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.after_placement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.after_placement" title="Link to this definition">¶</a></dt>
+<dd><p>Called from Flow when the nodes gets added.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.prepare_removal">
+<span class="sig-name descname"><span class="pre">prepare_removal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.prepare_removal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.prepare_removal" title="Link to this definition">¶</a></dt>
+<dd><p>Called from Flow when the node gets removed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.update" title="Link to this definition">¶</a></dt>
+<dd><p>Activates the node, causing an <code class="docutils literal notranslate"><span class="pre">update_event()</span></code> if <code class="docutils literal notranslate"><span class="pre">block_updates</span></code> is not set.
+For performance-, simplicity-, and maintainability-reasons activation is now
+fully handed over to the operating <code class="docutils literal notranslate"><span class="pre">FlowExecutor</span></code>, and not managed decentralized
+in Node, NodePort, and Connection anymore.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.update_port">
+<span class="sig-name descname"><span class="pre">update_port</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.NodeInput" title="cognixcore.port.NodeInput"><span class="pre">cognixcore.port.NodeInput</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.update_port"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.update_port" title="Link to this definition">¶</a></dt>
+<dd><p>Activates the node if the given input port can be found.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.update_err">
+<span class="sig-name descname"><span class="pre">update_err</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.update_err"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.update_err" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.input">
+<span class="sig-name descname"><span class="pre">input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.input" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the data residing at the data input of given index.</p>
+<p>Do not call on exec inputs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.exec_output">
+<span class="sig-name descname"><span class="pre">exec_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.exec_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.exec_output" title="Link to this definition">¶</a></dt>
+<dd><p>Executes an exec output, causing activation of all connections.</p>
+<p>Do not call on data outputs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.set_output">
+<span class="sig-name descname"><span class="pre">set_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.set_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.set_output" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the value of a data output causing activation of all connections in data mode.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.update_event">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.update_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.update_event" title="Link to this definition">¶</a></dt>
+<dd><p><em>ABSTRACT</em></p>
+<p>Gets called when an input received a signal or some node requested data of an output in exec mode.
+Implement this in your node class, this is the place where the main processing of your node should happen.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.place_event">
+<span class="sig-name descname"><span class="pre">place_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.place_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.place_event" title="Link to this definition">¶</a></dt>
+<dd><p><em>VIRTUAL</em></p>
+<p>Called once the node object has been fully initialized and placed in the flow.
+When loading content, <code class="code docutils literal notranslate"><span class="pre">place_event()</span></code> is executed <em>before</em> connections are built.</p>
+<p>Notice that this method gets executed <em>every time</em> the node is added to the flow, which can happen
+more than once if the node was subsequently removed (e.g. due to undo/redo operations).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.remove_event">
+<span class="sig-name descname"><span class="pre">remove_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.remove_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.remove_event" title="Link to this definition">¶</a></dt>
+<dd><p><em>VIRTUAL</em></p>
+<p>Called when the node is removed from the flow; useful for stopping threads and timers etc.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.init">
+<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.init" title="Link to this definition">¶</a></dt>
+<dd><p>VIRTUAL</p>
+<p>Invoked when the a flow player has started. In a later revision,
+will be invoked when placed inside a flow in interactive mode.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.pause">
+<span class="sig-name descname"><span class="pre">pause</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.pause"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.pause" title="Link to this definition">¶</a></dt>
+<dd><p>VIRTUAL</p>
+<p>Invoked when the graph player is paused</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.stop" title="Link to this definition">¶</a></dt>
+<dd><p>VIRTUAL</p>
+<p>Invoked when the graph player is stopped</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.destroy">
+<span class="sig-name descname"><span class="pre">destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.destroy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.destroy" title="Link to this definition">¶</a></dt>
+<dd><p>Invoked when the application exits</p>
+<p>Maybe not useful right now</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.additional_data">
+<span class="sig-name descname"><span class="pre">additional_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.additional_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.additional_data" title="Link to this definition">¶</a></dt>
+<dd><p><em>VIRTUAL</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">additional_data()</span></code>/<code class="docutils literal notranslate"><span class="pre">load_additional_data()</span></code> is almost equivalent to
+<code class="docutils literal notranslate"><span class="pre">get_state()</span></code>/<code class="docutils literal notranslate"><span class="pre">set_state()</span></code>,
+but it turned out to be useful for frontends to have their own dedicated version,
+so <code class="docutils literal notranslate"><span class="pre">get_state()</span></code>/<code class="docutils literal notranslate"><span class="pre">set_state()</span></code> stays clean for all specific node subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.load_additional_data">
+<span class="sig-name descname"><span class="pre">load_additional_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.load_additional_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.load_additional_data" title="Link to this definition">¶</a></dt>
+<dd><p><em>VIRTUAL</em></p>
+<p>For loading the data returned by <code class="docutils literal notranslate"><span class="pre">additional_data()</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.get_state">
+<span class="sig-name descname"><span class="pre">get_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.get_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.get_state" title="Link to this definition">¶</a></dt>
+<dd><p><em>VIRTUAL</em></p>
+<p>If your node is stateful, implement this method for serialization. It should return a JSON compatible
+dict that encodes your node’s state. The dict will be passed to <code class="docutils literal notranslate"><span class="pre">set_state()</span></code> when the node is loaded.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.set_state">
+<span class="sig-name descname"><span class="pre">set_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.set_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.set_state" title="Link to this definition">¶</a></dt>
+<dd><p><em>VIRTUAL</em></p>
+<p>Opposite of <code class="docutils literal notranslate"><span class="pre">get_state()</span></code>, reconstruct any custom internal state here.
+Notice, that add-ons might not yet be fully available here, but in
+<code class="docutils literal notranslate"><span class="pre">place_event()</span></code> the should be.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.rebuilt">
+<span class="sig-name descname"><span class="pre">rebuilt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.rebuilt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.rebuilt" title="Link to this definition">¶</a></dt>
+<dd><p><em>VIRTUAL</em></p>
+<p>If the node was created by loading components in the flow (see <code class="code docutils literal notranslate"><span class="pre">Flow.load_components()</span></code>),
+this method will be called after the node has been added to the graph and incident connections
+are established.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.any_port_connected">
+<span class="sig-name descname"><span class="pre">any_port_connected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.any_port_connected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.any_port_connected" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.any_input_connected">
+<span class="sig-name descname"><span class="pre">any_input_connected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.any_input_connected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.any_input_connected" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.any_output_connected">
+<span class="sig-name descname"><span class="pre">any_output_connected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.any_output_connected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.any_output_connected" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.input_connected">
+<span class="sig-name descname"><span class="pre">input_connected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../port/index.html#cognixcore.port.NodeInput" title="cognixcore.port.NodeInput"><span class="pre">cognixcore.port.NodeInput</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.input_connected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.input_connected" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.output_connected">
+<span class="sig-name descname"><span class="pre">output_connected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../port/index.html#cognixcore.port.NodeOutput" title="cognixcore.port.NodeOutput"><span class="pre">cognixcore.port.NodeOutput</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.output_connected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.output_connected" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.create_input">
+<span class="sig-name descname"><span class="pre">create_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.PortConfig" title="cognixcore.port.PortConfig"><span class="pre">cognixcore.port.PortConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insert</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.create_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.create_input" title="Link to this definition">¶</a></dt>
+<dd><p>Creates and adds a new input at the end or index <code class="docutils literal notranslate"><span class="pre">insert</span></code> if specified.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.rename_input">
+<span class="sig-name descname"><span class="pre">rename_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.rename_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.rename_input" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.delete_input">
+<span class="sig-name descname"><span class="pre">delete_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.delete_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.delete_input" title="Link to this definition">¶</a></dt>
+<dd><p>Disconnects and removes an input.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.create_output">
+<span class="sig-name descname"><span class="pre">create_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.PortConfig" title="cognixcore.port.PortConfig"><span class="pre">cognixcore.port.PortConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insert</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.create_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.create_output" title="Link to this definition">¶</a></dt>
+<dd><p>Creates and adds a new output at the end or index <code class="docutils literal notranslate"><span class="pre">insert</span></code> if specified.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.rename_output">
+<span class="sig-name descname"><span class="pre">rename_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.rename_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.rename_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.delete_output">
+<span class="sig-name descname"><span class="pre">delete_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.delete_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.delete_output" title="Link to this definition">¶</a></dt>
+<dd><p>Disconnects and removes output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.get_addon">
+<span class="sig-name descname"><span class="pre">get_addon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span><span class="p"><span class="pre">[</span></span><span class="pre">cognixcore.addons.AddonType</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">cognixcore.addons.AddonType</span></span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.get_addon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.get_addon" title="Link to this definition">¶</a></dt>
+<dd><p>Returns an add-on registered in the session by name, or None if it wasn’t found.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.node.Node.progress">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">progress</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../rc/index.html#cognixcore.rc.ProgressState" title="cognixcore.rc.ProgressState"><span class="pre">cognixcore.rc.ProgressState</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.progress" title="Link to this definition">¶</a></dt>
+<dd><p>Copy of the current progress of execution in the node, or None if there’s no active progress</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.set_progress">
+<span class="sig-name descname"><span class="pre">set_progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">progress_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rc/index.html#cognixcore.rc.ProgressState" title="cognixcore.rc.ProgressState"><span class="pre">cognixcore.rc.ProgressState</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_percentage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.set_progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.set_progress" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the progress, allowing to turn it into a percentage</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.set_progress_value">
+<span class="sig-name descname"><span class="pre">set_progress_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numbers.Real</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_percentage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.set_progress_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.set_progress_value" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the value of an existing progress</p>
+<p>Sets the message as well if it isn’t None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.set_progress_msg">
+<span class="sig-name descname"><span class="pre">set_progress_msg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.set_progress_msg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.set_progress_msg" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.is_active">
+<span class="sig-name descname"><span class="pre">is_active</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.is_active"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.is_active" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.load" title="Link to this definition">¶</a></dt>
+<dd><p>Initializes the node from the data dict returned by <code class="code docutils literal notranslate"><span class="pre">Node.data()</span></code>.
+Called by the flow, before the node is added to it.
+It does not crash on exception when loading user_data,
+as this is not uncommon when developing nodes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.data" title="Link to this definition">¶</a></dt>
+<dd><p>Serializes the node’s metadata, current configuration, and user state into
+a JSON-compatible dict, from which the node can be loaded later using
+<code class="code docutils literal notranslate"><span class="pre">Node.load()</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="cognixcore.node.NodeType">
+<span class="sig-name descname"><span class="pre">NodeType</span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#NodeType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.NodeType" title="Link to this definition">¶</a></dt>
+<dd><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code> for describing node types in a generic way</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cognixcore.node.node_from_identifier">
+<span class="sig-name descname"><span class="pre">node_from_identifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cognixcore.node.Node" title="cognixcore.node.Node"><span class="pre">Node</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#node_from_identifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.node_from_identifier" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cognixcore.node.FrameNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FrameNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../flow/index.html#cognixcore.flow.Flow" title="cognixcore.flow.Flow"><span class="pre">cognixcore.flow.Flow</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../config/index.html#cognixcore.config.NodeConfig" title="cognixcore.config.NodeConfig"><span class="pre">cognixcore.config.NodeConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#FrameNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.FrameNode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cognixcore.node.Node" title="cognixcore.node.Node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Node</span></code></a></p>
+<p>A node which updates every frame, where frame is defined by a <a class="reference internal" href="../flow_player/index.html#cognixcore.flow_player.GraphPlayer" title="cognixcore.flow_player.GraphPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">cognixcore.flow_player.GraphPlayer</span></code></a>.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.node.FrameNode.is_finished">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_finished</span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#FrameNode.is_finished"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.FrameNode.is_finished" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.FrameNode.update_event">
+<span class="sig-name descname"><span class="pre">update_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#FrameNode.update_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.FrameNode.update_event" title="Link to this definition">¶</a></dt>
+<dd><p><em>ABSTRACT</em></p>
+<p>Gets called when an input received a signal or some node requested data of an output in exec mode.
+Implement this in your node class, this is the place where the main processing of your node should happen.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.FrameNode.frame_update">
+<span class="sig-name descname"><span class="pre">frame_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#FrameNode.frame_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.FrameNode.frame_update" title="Link to this definition">¶</a></dt>
+<dd><p>Wraps the frame_update_event with internal calls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.FrameNode.frame_update_event">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frame_update_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#FrameNode.frame_update_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.FrameNode.frame_update_event" title="Link to this definition">¶</a></dt>
+<dd><p>Called on every frame. Data might have been passed from other nodes</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cognixcore.node.NodeAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NodeAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cognixcore.node.Node" title="cognixcore.node.Node"><span class="pre">Node</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#NodeAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.NodeAction" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>A wrapper for defining an action that can happen for the node</p>
+<p>Useful for defining actions that can then be directly translated
+to a context menu.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cognixcore.node.NodeAction.Status">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Status</span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#NodeAction.Status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.NodeAction.Status" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></p>
+<p>Enum where members are also (and must be) ints</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.NodeAction.Status.ENABLED">
+<span class="sig-name descname"><span class="pre">ENABLED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#NodeAction.Status.ENABLED"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.NodeAction.Status.ENABLED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.NodeAction.Status.DISABLED">
+<span class="sig-name descname"><span class="pre">DISABLED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#NodeAction.Status.DISABLED"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.NodeAction.Status.DISABLED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cognixcore.node.NodeAction.Status.HIDDEN">
+<span class="sig-name descname"><span class="pre">HIDDEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../_modules/cognixcore/node.html#NodeAction.Status.HIDDEN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.NodeAction.Status.HIDDEN" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.node.NodeAction.status">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status</span></span><a class="reference internal" href="../../../_modules/cognixcore/node.html#NodeAction.status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.NodeAction.status" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.NodeAction.invoke">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invoke</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#NodeAction.invoke"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.NodeAction.invoke" title="Link to this definition">¶</a></dt>
+<dd><p>The action is invoked!</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.NodeAction.update">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#NodeAction.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.NodeAction.update" title="Link to this definition">¶</a></dt>
+<dd><p>Update attributes of the action before it is invoked</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cognixcore.node.GenericNodeAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GenericNodeAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cognixcore.node.Node" title="cognixcore.node.Node"><span class="pre">Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">invoke</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#GenericNodeAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.GenericNodeAction" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cognixcore.node.NodeAction" title="cognixcore.node.NodeAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NodeAction</span></code></a></p>
+<p>A generic node action that takes another method and wraps it</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.GenericNodeAction.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#GenericNodeAction.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.GenericNodeAction.update" title="Link to this definition">¶</a></dt>
+<dd><p>Update attributes of the action before it is invoked</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.GenericNodeAction.invoke">
+<span class="sig-name descname"><span class="pre">invoke</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#GenericNodeAction.invoke"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.GenericNodeAction.invoke" title="Link to this definition">¶</a></dt>
+<dd><p>The action is invoked!</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cognixcore.node.get_node_classes">
+<span class="sig-name descname"><span class="pre">get_node_classes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#get_node_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.get_node_classes" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a list of node types defined in the current module that are not abstract</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cognixcore.node.get_versioned_nodes">
+<span class="sig-name descname"><span class="pre">get_versioned_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#get_versioned_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.get_versioned_nodes" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a list of node types defined in the current module that are not
+abstract and their version attribute is not None.</p>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../port/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">cognixcore.port</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../models/index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">cognixcore.models</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, CogniX
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">cognixcore.node</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#cognixcore.node.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
+<li><a class="reference internal" href="#cognixcore.node.Node.id_name"><code class="docutils literal notranslate"><span class="pre">Node.id_name</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.id_prefix"><code class="docutils literal notranslate"><span class="pre">Node.id_prefix</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.legacy_ids"><code class="docutils literal notranslate"><span class="pre">Node.legacy_ids</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.title"><code class="docutils literal notranslate"><span class="pre">Node.title</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.tags"><code class="docutils literal notranslate"><span class="pre">Node.tags</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.version"><code class="docutils literal notranslate"><span class="pre">Node.version</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.init_inputs"><code class="docutils literal notranslate"><span class="pre">Node.init_inputs</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.init_outputs"><code class="docutils literal notranslate"><span class="pre">Node.init_outputs</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.inner_config_type"><code class="docutils literal notranslate"><span class="pre">Node.inner_config_type</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.build_identifiable"><code class="docutils literal notranslate"><span class="pre">Node.build_identifiable()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.id"><code class="docutils literal notranslate"><span class="pre">Node.id()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.identifiable"><code class="docutils literal notranslate"><span class="pre">Node.identifiable()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.__init_subclass__"><code class="docutils literal notranslate"><span class="pre">Node.__init_subclass__()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.type_to_data"><code class="docutils literal notranslate"><span class="pre">Node.type_to_data()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.num_inputs"><code class="docutils literal notranslate"><span class="pre">Node.num_inputs</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.num_outputs"><code class="docutils literal notranslate"><span class="pre">Node.num_outputs</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.actions"><code class="docutils literal notranslate"><span class="pre">Node.actions</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.config"><code class="docutils literal notranslate"><span class="pre">Node.config</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.player"><code class="docutils literal notranslate"><span class="pre">Node.player</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.logger"><code class="docutils literal notranslate"><span class="pre">Node.logger</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.vars_addon"><code class="docutils literal notranslate"><span class="pre">Node.vars_addon</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.var_val"><code class="docutils literal notranslate"><span class="pre">Node.var_val()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.var_val_get"><code class="docutils literal notranslate"><span class="pre">Node.var_val_get()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.set_var_val"><code class="docutils literal notranslate"><span class="pre">Node.set_var_val()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.set_config"><code class="docutils literal notranslate"><span class="pre">Node.set_config()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.add_action"><code class="docutils literal notranslate"><span class="pre">Node.add_action()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.add_generic_action"><code class="docutils literal notranslate"><span class="pre">Node.add_generic_action()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.after_placement"><code class="docutils literal notranslate"><span class="pre">Node.after_placement()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.prepare_removal"><code class="docutils literal notranslate"><span class="pre">Node.prepare_removal()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.update"><code class="docutils literal notranslate"><span class="pre">Node.update()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.update_port"><code class="docutils literal notranslate"><span class="pre">Node.update_port()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.update_err"><code class="docutils literal notranslate"><span class="pre">Node.update_err()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.input"><code class="docutils literal notranslate"><span class="pre">Node.input()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.exec_output"><code class="docutils literal notranslate"><span class="pre">Node.exec_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.set_output"><code class="docutils literal notranslate"><span class="pre">Node.set_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.update_event"><code class="docutils literal notranslate"><span class="pre">Node.update_event()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.place_event"><code class="docutils literal notranslate"><span class="pre">Node.place_event()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.remove_event"><code class="docutils literal notranslate"><span class="pre">Node.remove_event()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.init"><code class="docutils literal notranslate"><span class="pre">Node.init()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.pause"><code class="docutils literal notranslate"><span class="pre">Node.pause()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.stop"><code class="docutils literal notranslate"><span class="pre">Node.stop()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.destroy"><code class="docutils literal notranslate"><span class="pre">Node.destroy()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.additional_data"><code class="docutils literal notranslate"><span class="pre">Node.additional_data()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.load_additional_data"><code class="docutils literal notranslate"><span class="pre">Node.load_additional_data()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.get_state"><code class="docutils literal notranslate"><span class="pre">Node.get_state()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.set_state"><code class="docutils literal notranslate"><span class="pre">Node.set_state()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.rebuilt"><code class="docutils literal notranslate"><span class="pre">Node.rebuilt()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.any_port_connected"><code class="docutils literal notranslate"><span class="pre">Node.any_port_connected()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.any_input_connected"><code class="docutils literal notranslate"><span class="pre">Node.any_input_connected()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.any_output_connected"><code class="docutils literal notranslate"><span class="pre">Node.any_output_connected()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.input_connected"><code class="docutils literal notranslate"><span class="pre">Node.input_connected()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.output_connected"><code class="docutils literal notranslate"><span class="pre">Node.output_connected()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.create_input"><code class="docutils literal notranslate"><span class="pre">Node.create_input()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.rename_input"><code class="docutils literal notranslate"><span class="pre">Node.rename_input()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.delete_input"><code class="docutils literal notranslate"><span class="pre">Node.delete_input()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.create_output"><code class="docutils literal notranslate"><span class="pre">Node.create_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.rename_output"><code class="docutils literal notranslate"><span class="pre">Node.rename_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.delete_output"><code class="docutils literal notranslate"><span class="pre">Node.delete_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.get_addon"><code class="docutils literal notranslate"><span class="pre">Node.get_addon()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.progress"><code class="docutils literal notranslate"><span class="pre">Node.progress</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.set_progress"><code class="docutils literal notranslate"><span class="pre">Node.set_progress()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.set_progress_value"><code class="docutils literal notranslate"><span class="pre">Node.set_progress_value()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.set_progress_msg"><code class="docutils literal notranslate"><span class="pre">Node.set_progress_msg()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.is_active"><code class="docutils literal notranslate"><span class="pre">Node.is_active()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.load"><code class="docutils literal notranslate"><span class="pre">Node.load()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.data"><code class="docutils literal notranslate"><span class="pre">Node.data()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cognixcore.node.NodeType"><code class="docutils literal notranslate"><span class="pre">NodeType</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.node_from_identifier"><code class="docutils literal notranslate"><span class="pre">node_from_identifier()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.FrameNode"><code class="docutils literal notranslate"><span class="pre">FrameNode</span></code></a><ul>
+<li><a class="reference internal" href="#cognixcore.node.FrameNode.is_finished"><code class="docutils literal notranslate"><span class="pre">FrameNode.is_finished</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.FrameNode.update_event"><code class="docutils literal notranslate"><span class="pre">FrameNode.update_event()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.FrameNode.frame_update"><code class="docutils literal notranslate"><span class="pre">FrameNode.frame_update()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.FrameNode.frame_update_event"><code class="docutils literal notranslate"><span class="pre">FrameNode.frame_update_event()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cognixcore.node.NodeAction"><code class="docutils literal notranslate"><span class="pre">NodeAction</span></code></a><ul>
+<li><a class="reference internal" href="#cognixcore.node.NodeAction.Status"><code class="docutils literal notranslate"><span class="pre">NodeAction.Status</span></code></a><ul>
+<li><a class="reference internal" href="#cognixcore.node.NodeAction.Status.ENABLED"><code class="docutils literal notranslate"><span class="pre">NodeAction.Status.ENABLED</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.NodeAction.Status.DISABLED"><code class="docutils literal notranslate"><span class="pre">NodeAction.Status.DISABLED</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.NodeAction.Status.HIDDEN"><code class="docutils literal notranslate"><span class="pre">NodeAction.Status.HIDDEN</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cognixcore.node.NodeAction.status"><code class="docutils literal notranslate"><span class="pre">NodeAction.status</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.NodeAction.invoke"><code class="docutils literal notranslate"><span class="pre">NodeAction.invoke()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.NodeAction.update"><code class="docutils literal notranslate"><span class="pre">NodeAction.update()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cognixcore.node.GenericNodeAction"><code class="docutils literal notranslate"><span class="pre">GenericNodeAction</span></code></a><ul>
+<li><a class="reference internal" href="#cognixcore.node.GenericNodeAction.update"><code class="docutils literal notranslate"><span class="pre">GenericNodeAction.update()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.GenericNodeAction.invoke"><code class="docutils literal notranslate"><span class="pre">GenericNodeAction.invoke()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cognixcore.node.get_node_classes"><code class="docutils literal notranslate"><span class="pre">get_node_classes()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.get_versioned_nodes"><code class="docutils literal notranslate"><span class="pre">get_versioned_nodes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=175e4471"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
+    </body>
+</html>

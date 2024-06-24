@@ -1,0 +1,707 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="cognixcore.flow_player" href="../flow_player/index.html" /><link rel="prev" title="cognixcore.flow" href="../flow/index.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>cognixcore.flow_executor - cognixcore v0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">cognixcore v0.9 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">cognixcore v0.9 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">cognixcore</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of cognixcore</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../addons/index.html">cognixcore.addons</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of cognixcore.addons</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../addons/variables/index.html">cognixcore.addons.variables</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of cognixcore.addons.variables</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../addons/variables/builtin/index.html">cognixcore.addons.variables.builtin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../addons/builtin/index.html">cognixcore.addons.builtin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../addons/logging/index.html">cognixcore.addons.logging</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../config/index.html">cognixcore.config</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of cognixcore.config</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../config/traits/index.html">cognixcore.config.traits</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../networking/index.html">cognixcore.networking</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of cognixcore.networking</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../networking/rest_api/index.html">cognixcore.networking.rest_api</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../base/index.html">cognixcore.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flow/index.html">cognixcore.flow</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">cognixcore.flow_executor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flow_player/index.html">cognixcore.flow_player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../info_msgs/index.html">cognixcore.info_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/index.html">cognixcore.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/index.html">cognixcore.node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../port/index.html">cognixcore.port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rc/index.html">cognixcore.rc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializers/index.html">cognixcore.serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session/index.html">cognixcore.session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/index.html">cognixcore.utils</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../_sources/autoapi/cognixcore/flow_executor/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-cognixcore.flow_executor">
+<span id="cognixcore-flow-executor"></span><h1>cognixcore.flow_executor<a class="headerlink" href="#module-cognixcore.flow_executor" title="Link to this heading">¶</a></h1>
+<p>The flow executors are responsible for executing the flow. They have access to
+the flow as well as the nodes’ internals and are able to perform optimizations.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor" title="cognixcore.flow_executor.FlowExecutor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlowExecutor</span></code></a></p></td>
+<td><p>Base class for special flow execution algorithms.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cognixcore.flow_executor.ManualFlow" title="cognixcore.flow_executor.ManualFlow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ManualFlow</span></code></a></p></td>
+<td><p>An executor that doesn't propagate any data between nodes. Doesn't</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cognixcore.flow_executor.DataFlowNaive" title="cognixcore.flow_executor.DataFlowNaive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFlowNaive</span></code></a></p></td>
+<td><p>The naive implementation of data-flow execution. Naive meaning setting a node output</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized" title="cognixcore.flow_executor.DataFlowOptimized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFlowOptimized</span></code></a></p></td>
+<td><p><em>(see also documentation in Flow)</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cognixcore.flow_executor.ExecFlowNaive" title="cognixcore.flow_executor.ExecFlowNaive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExecFlowNaive</span></code></a></p></td>
+<td><p><p>...</p>
+</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cognixcore.flow_executor.executor_from_flow_alg" title="cognixcore.flow_executor.executor_from_flow_alg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">executor_from_flow_alg</span></code></a>(algorithm)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cognixcore.flow_executor.flow_alg_from_executor" title="cognixcore.flow_executor.flow_alg_from_executor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flow_alg_from_executor</span></code></a>(exec_type)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.FlowExecutor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FlowExecutor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../flow/index.html#cognixcore.flow.Flow" title="cognixcore.flow.Flow"><span class="pre">cognixcore.flow.Flow</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#FlowExecutor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.FlowExecutor" title="Link to this definition">¶</a></dt>
+<dd><p>Base class for special flow execution algorithms.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.FlowExecutor.graph">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">graph</span></span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#FlowExecutor.graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.FlowExecutor.graph" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.FlowExecutor.graph_rev">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">graph_rev</span></span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#FlowExecutor.graph_rev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.FlowExecutor.graph_rev" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.FlowExecutor.update_node">
+<span class="sig-name descname"><span class="pre">update_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#FlowExecutor.update_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.FlowExecutor.update_node" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.FlowExecutor.input">
+<span class="sig-name descname"><span class="pre">input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#FlowExecutor.input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.FlowExecutor.input" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.FlowExecutor.set_output">
+<span class="sig-name descname"><span class="pre">set_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#FlowExecutor.set_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.FlowExecutor.set_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.FlowExecutor.exec_output">
+<span class="sig-name descname"><span class="pre">exec_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#FlowExecutor.exec_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.FlowExecutor.exec_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.FlowExecutor.conn_added">
+<span class="sig-name descname"><span class="pre">conn_added</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.NodeOutput" title="cognixcore.port.NodeOutput"><span class="pre">cognixcore.port.NodeOutput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.NodeInput" title="cognixcore.port.NodeInput"><span class="pre">cognixcore.port.NodeInput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">silent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#FlowExecutor.conn_added"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.FlowExecutor.conn_added" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.FlowExecutor.conn_removed">
+<span class="sig-name descname"><span class="pre">conn_removed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.NodeOutput" title="cognixcore.port.NodeOutput"><span class="pre">cognixcore.port.NodeOutput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.NodeInput" title="cognixcore.port.NodeInput"><span class="pre">cognixcore.port.NodeInput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">silent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#FlowExecutor.conn_removed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.FlowExecutor.conn_removed" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ManualFlow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ManualFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../flow/index.html#cognixcore.flow.Flow" title="cognixcore.flow.Flow"><span class="pre">cognixcore.flow.Flow</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ManualFlow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ManualFlow" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor" title="cognixcore.flow_executor.FlowExecutor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlowExecutor</span></code></a></p>
+<p>An executor that doesn’t propagate any data between nodes. Doesn’t
+handle the exec_output.</p>
+<p>To be used for manual and/or external evaluation of the whole flow graph.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ManualFlow.update_node">
+<span class="sig-name descname"><span class="pre">update_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ManualFlow.update_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ManualFlow.update_node" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ManualFlow.input">
+<span class="sig-name descname"><span class="pre">input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ManualFlow.input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ManualFlow.input" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ManualFlow.set_output">
+<span class="sig-name descname"><span class="pre">set_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ManualFlow.set_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ManualFlow.set_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ManualFlow.should_input_update">
+<span class="sig-name descname"><span class="pre">should_input_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.NodeInput" title="cognixcore.port.NodeInput"><span class="pre">cognixcore.port.NodeInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ManualFlow.should_input_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ManualFlow.should_input_update" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ManualFlow.has_updated_outputs">
+<span class="sig-name descname"><span class="pre">has_updated_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ManualFlow.has_updated_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ManualFlow.has_updated_outputs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ManualFlow.clear_updates">
+<span class="sig-name descname"><span class="pre">clear_updates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ManualFlow.clear_updates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ManualFlow.clear_updates" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowNaive">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DataFlowNaive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../flow/index.html#cognixcore.flow.Flow" title="cognixcore.flow.Flow"><span class="pre">cognixcore.flow.Flow</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowNaive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowNaive" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor" title="cognixcore.flow_executor.FlowExecutor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlowExecutor</span></code></a></p>
+<p>The naive implementation of data-flow execution. Naive meaning setting a node output
+leads to an immediate update in all successors consecutively. No runtime optimization
+if performed, and some types of graphs can run really slow here, especially if they
+include “diamonds”.</p>
+<p>Assumptions for the graph:
+- no non-terminating feedback loops</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowNaive.update_node">
+<span class="sig-name descname"><span class="pre">update_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowNaive.update_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowNaive.update_node" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowNaive.input">
+<span class="sig-name descname"><span class="pre">input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowNaive.input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowNaive.input" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowNaive.set_output">
+<span class="sig-name descname"><span class="pre">set_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowNaive.set_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowNaive.set_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowNaive.exec_output">
+<span class="sig-name descname"><span class="pre">exec_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowNaive.exec_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowNaive.exec_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowNaive.conn_added">
+<span class="sig-name descname"><span class="pre">conn_added</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.NodeOutput" title="cognixcore.port.NodeOutput"><span class="pre">cognixcore.port.NodeOutput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.NodeInput" title="cognixcore.port.NodeInput"><span class="pre">cognixcore.port.NodeInput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">silent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowNaive.conn_added"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowNaive.conn_added" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowNaive.conn_removed">
+<span class="sig-name descname"><span class="pre">conn_removed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowNaive.conn_removed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowNaive.conn_removed" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DataFlowOptimized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cognixcore.flow_executor.DataFlowNaive" title="cognixcore.flow_executor.DataFlowNaive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFlowNaive</span></code></a></p>
+<p><em>(see also documentation in Flow)</em></p>
+<p>A special flow executor which implements some node functions to optimise flow execution.
+Whenever a new execution is invoked somewhere (some node or output is updated), it
+analyses the graph’s connected component (of successors) where the execution was invoked
+and creates a few data structures to reverse engineer how many input
+updates every node possibly receives in this execution. A node’s outputs are
+propagated once no input can still receive new data from a predecessor node.
+Therefore, while a node gets updated every time an input receives some data,
+every OUTPUT is only updated ONCE.
+This implies that every connection is activated at most once in an execution.
+This can result in asymptotic speedup in large data flows compared to normal data flow
+execution where any two executed branches which merge again in the future result in two
+complete executions of everything that comes after the merge, which quickly produces
+exponential performance issues.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized.update_node">
+<span class="sig-name descname"><span class="pre">update_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized.update_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized.update_node" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized.set_output">
+<span class="sig-name descname"><span class="pre">set_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized.set_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized.set_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized.exec_output">
+<span class="sig-name descname"><span class="pre">exec_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized.exec_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized.exec_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized.start_execution">
+<span class="sig-name descname"><span class="pre">start_execution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.NodeOutput" title="cognixcore.port.NodeOutput"><span class="pre">cognixcore.port.NodeOutput</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized.start_execution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized.start_execution" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized.stop_execution">
+<span class="sig-name descname"><span class="pre">stop_execution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized.stop_execution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized.stop_execution" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized.generate_waiting_count">
+<span class="sig-name descname"><span class="pre">generate_waiting_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized.generate_waiting_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized.generate_waiting_count" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized.invoke_node_update_event">
+<span class="sig-name descname"><span class="pre">invoke_node_update_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized.invoke_node_update_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized.invoke_node_update_event" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized.decrease_wait">
+<span class="sig-name descname"><span class="pre">decrease_wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized.decrease_wait"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized.decrease_wait" title="Link to this definition">¶</a></dt>
+<dd><p>decreases the wait count of the node;
+if the count reaches zero, which means there is no other input waiting for data,
+the output values get propagated</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized.propagate_outputs">
+<span class="sig-name descname"><span class="pre">propagate_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized.propagate_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized.propagate_outputs" title="Link to this definition">¶</a></dt>
+<dd><p>propagates all outputs of node</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.DataFlowOptimized.propagate_output">
+<span class="sig-name descname"><span class="pre">propagate_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#DataFlowOptimized.propagate_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.DataFlowOptimized.propagate_output" title="Link to this definition">¶</a></dt>
+<dd><p>pushes an output’s value to successors if it has been changed in the execution</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ExecFlowNaive">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ExecFlowNaive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ExecFlowNaive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ExecFlowNaive" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor" title="cognixcore.flow_executor.FlowExecutor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlowExecutor</span></code></a></p>
+<p>…</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ExecFlowNaive.update_node">
+<span class="sig-name descname"><span class="pre">update_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ExecFlowNaive.update_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ExecFlowNaive.update_node" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ExecFlowNaive.input">
+<span class="sig-name descname"><span class="pre">input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ExecFlowNaive.input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ExecFlowNaive.input" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ExecFlowNaive.set_output">
+<span class="sig-name descname"><span class="pre">set_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ExecFlowNaive.set_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ExecFlowNaive.set_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.ExecFlowNaive.exec_output">
+<span class="sig-name descname"><span class="pre">exec_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cognixcore.flow.Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#ExecFlowNaive.exec_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.ExecFlowNaive.exec_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.executor_from_flow_alg">
+<span class="sig-name descname"><span class="pre">executor_from_flow_alg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rc/index.html#cognixcore.rc.FlowAlg" title="cognixcore.rc.FlowAlg"><span class="pre">cognixcore.rc.FlowAlg</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#executor_from_flow_alg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.executor_from_flow_alg" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cognixcore.flow_executor.flow_alg_from_executor">
+<span class="sig-name descname"><span class="pre">flow_alg_from_executor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor" title="cognixcore.flow_executor.FlowExecutor"><span class="pre">FlowExecutor</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/flow_executor.html#flow_alg_from_executor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.flow_executor.flow_alg_from_executor" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../flow_player/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">cognixcore.flow_player</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../flow/index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">cognixcore.flow</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, CogniX
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">cognixcore.flow_executor</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor"><code class="docutils literal notranslate"><span class="pre">FlowExecutor</span></code></a><ul>
+<li><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor.graph"><code class="docutils literal notranslate"><span class="pre">FlowExecutor.graph</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor.graph_rev"><code class="docutils literal notranslate"><span class="pre">FlowExecutor.graph_rev</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor.update_node"><code class="docutils literal notranslate"><span class="pre">FlowExecutor.update_node()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor.input"><code class="docutils literal notranslate"><span class="pre">FlowExecutor.input()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor.set_output"><code class="docutils literal notranslate"><span class="pre">FlowExecutor.set_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor.exec_output"><code class="docutils literal notranslate"><span class="pre">FlowExecutor.exec_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor.conn_added"><code class="docutils literal notranslate"><span class="pre">FlowExecutor.conn_added()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.FlowExecutor.conn_removed"><code class="docutils literal notranslate"><span class="pre">FlowExecutor.conn_removed()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ManualFlow"><code class="docutils literal notranslate"><span class="pre">ManualFlow</span></code></a><ul>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ManualFlow.update_node"><code class="docutils literal notranslate"><span class="pre">ManualFlow.update_node()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ManualFlow.input"><code class="docutils literal notranslate"><span class="pre">ManualFlow.input()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ManualFlow.set_output"><code class="docutils literal notranslate"><span class="pre">ManualFlow.set_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ManualFlow.should_input_update"><code class="docutils literal notranslate"><span class="pre">ManualFlow.should_input_update()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ManualFlow.has_updated_outputs"><code class="docutils literal notranslate"><span class="pre">ManualFlow.has_updated_outputs()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ManualFlow.clear_updates"><code class="docutils literal notranslate"><span class="pre">ManualFlow.clear_updates()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowNaive"><code class="docutils literal notranslate"><span class="pre">DataFlowNaive</span></code></a><ul>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowNaive.update_node"><code class="docutils literal notranslate"><span class="pre">DataFlowNaive.update_node()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowNaive.input"><code class="docutils literal notranslate"><span class="pre">DataFlowNaive.input()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowNaive.set_output"><code class="docutils literal notranslate"><span class="pre">DataFlowNaive.set_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowNaive.exec_output"><code class="docutils literal notranslate"><span class="pre">DataFlowNaive.exec_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowNaive.conn_added"><code class="docutils literal notranslate"><span class="pre">DataFlowNaive.conn_added()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowNaive.conn_removed"><code class="docutils literal notranslate"><span class="pre">DataFlowNaive.conn_removed()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized</span></code></a><ul>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized.update_node"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized.update_node()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized.set_output"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized.set_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized.exec_output"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized.exec_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized.start_execution"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized.start_execution()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized.stop_execution"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized.stop_execution()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized.generate_waiting_count"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized.generate_waiting_count()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized.invoke_node_update_event"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized.invoke_node_update_event()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized.decrease_wait"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized.decrease_wait()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized.propagate_outputs"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized.propagate_outputs()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.DataFlowOptimized.propagate_output"><code class="docutils literal notranslate"><span class="pre">DataFlowOptimized.propagate_output()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ExecFlowNaive"><code class="docutils literal notranslate"><span class="pre">ExecFlowNaive</span></code></a><ul>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ExecFlowNaive.update_node"><code class="docutils literal notranslate"><span class="pre">ExecFlowNaive.update_node()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ExecFlowNaive.input"><code class="docutils literal notranslate"><span class="pre">ExecFlowNaive.input()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ExecFlowNaive.set_output"><code class="docutils literal notranslate"><span class="pre">ExecFlowNaive.set_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.ExecFlowNaive.exec_output"><code class="docutils literal notranslate"><span class="pre">ExecFlowNaive.exec_output()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.executor_from_flow_alg"><code class="docutils literal notranslate"><span class="pre">executor_from_flow_alg()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.flow_executor.flow_alg_from_executor"><code class="docutils literal notranslate"><span class="pre">flow_alg_from_executor()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=175e4471"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
+    </body>
+</html>
