@@ -3,11 +3,11 @@
   <img src="./docs/img/logo.png" alt="drawing" width="70%"/>
 </p>
 
-A Python library for offline and streaming graph-based processing and evaluation, designed for modern flow-based/node-based scenarios. It is the driving force behind the CogniX project, but was designed with extensibility and modularity in mind. This library started as a fork of [ryvencore](https://github.com/leon-thomm/ryvencore), with additional functionality. Due to requirements that introduced breaking changes and deviation from the original source, the [fork](https://github.com/HeftyCoder/ryvencore/tree/cognix) was moved to a stand-alone repository.
+A Python library for offline and streaming graph-based processing and evaluation, designed for modern flow-based/node-based scenarios. It is the driving force behind the [CogniX](http://cognix.gr) project, but was designed with extensibility and modularity in mind. This library started as a fork of [ryvencore](https://github.com/leon-thomm/ryvencore), with additional functionality. Due to requirements that introduced breaking changes and deviation from the original source, the [fork](https://github.com/HeftyCoder/ryvencore/tree/cognix) was moved to a stand-alone repository.
 
 ### Installation
 
-PyPi installation is in the works.
+PyPi installation is in the works. Python Version should at least be 3.11.
 
 Install from sources - preferably after creating and activating a [python virtual environment](https://docs.python.org/3/library/venv.html): 
 ```
@@ -67,4 +67,4 @@ if __name__ == '__main__':
 
 ### Licensing
 
-cognixcore is licensed under the [LGPL License](https://github.com/CogniX-Up/cognixcore/blob/main/LICENSE).
+cognixcore is licensed under the [GPL License](https://github.com/CogniX-Up/cognixcore/blob/main/LICENSE).

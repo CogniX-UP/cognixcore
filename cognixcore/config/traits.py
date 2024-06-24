@@ -11,7 +11,6 @@ for an in-depth tutorial on how to use the default configuration classes.
 """
 
 from traits.api import *
-from traits.api import NoDefaultSpecified
 from traits.observation.expression import ObserverExpression, trait, anytrait
 from traits.trait_base import not_false, not_event
 from traits.observation.events import (
@@ -20,7 +19,6 @@ from traits.observation.events import (
     DictChangeEvent,
     SetChangeEvent,
 )
-from traits.trait_type import NoDefaultSpecified
 
 from traitsui.api import View, Item
 from typing import Callable, Any as AnyType

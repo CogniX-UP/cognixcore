@@ -80,7 +80,7 @@ First, our imports. We're using quite a lot more than before.
 Number Node
 ^^^^^^^^^^^
 
-.. literalinlcude:: examples/better_add.py
+.. literalinclude:: examples/better_add.py
    :language: python
    :linenos:
    :lines: 15-45

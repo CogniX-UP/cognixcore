@@ -1,5 +1,5 @@
 Flow Executors - Graph Players
---------------
+------------------------------
 
 This section notes the importance of :class:`cognixcore.FlowExecutor` (s) and :class:`cognixcore.GraphPlayer` (s). 
 

@@ -1,5 +1,5 @@
 A good starting example
---------------------
+-----------------------
 
 In this example, we're going to see how to create two nodes that can work together. One node represents a :code:`Number` while the other adds two :code:`Numbers`.
 
