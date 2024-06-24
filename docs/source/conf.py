@@ -45,7 +45,7 @@ version = release
 # Either include 'sphinx.ext.autodoc' or 'autoapi.extension' depending
 # on what you want to use
 extensions = [
-    'sphinx.ext.autodoc',
+    # 'sphinx.ext.autodoc',
     'sphinx.ext.inheritance_diagram',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
