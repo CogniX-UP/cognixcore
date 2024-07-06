@@ -125,20 +125,13 @@ class Node(Base, ABC):
     
     def __init__(self, flow: Flow, config: NodeConfig = None):
         Base.__init__(self)
-
-        if config:
-            self._config = config
-        elif self.inner_config_type:
-            self._config = self.inner_config_type(self)
-        else:
-            self._config = None
             
         self.flow = flow
         self.session = flow.session
         
         self._inputs: list[NodeInput] = []
         self._outputs: list[NodeOutput] = []
-
+        
         self.loaded = False
         self.load_data = None
 
@@ -163,6 +156,13 @@ class Node(Base, ABC):
         self.output_updated = Event[Node, int, NodeOutput, Any]()
         self.config_changed = Event[NodeConfig]()
         self.progress_updated = Event[ProgressState]()
+
+        if config:
+            self._config = config
+        elif self.inner_config_type:
+            self._config = self.inner_config_type(self)
+        else:
+            self._config = None
     
     @property
     def num_inputs(self):
@@ -510,6 +510,10 @@ class Node(Base, ABC):
             out = self._outputs[out]
         return len(self.flow.connected_inputs(out)) > 0
     
+    def clear_ports(self):
+        self.clear_inputs()
+        self.clear_outputs()
+        
     def create_input(self, port_info: PortConfig = None, load_from = None, insert: int = None):
         """
         Creates and adds a new input at the end or index ``insert`` if specified.
@@ -551,6 +555,11 @@ class Node(Base, ABC):
                 old_label
             )
 
+    def clear_inputs(self):
+        """Deletes all the inputs"""
+        for i in range(self.num_inputs):
+            self.delete_input(len(self._inputs) - 1)
+            
     def delete_input(self, index: int):
         """
         Disconnects and removes an input.
@@ -607,6 +616,11 @@ class Node(Base, ABC):
                 old_label
             )
 
+    def clear_outputs(self):
+        """Deletes all the outputs"""
+        for i in range(self.num_outputs):
+            self.delete_output(len(self._outputs) - 1)
+        
     def delete_output(self, index: int):
         """
         Disconnects and removes output.
