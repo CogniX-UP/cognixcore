@@ -24,6 +24,7 @@ from numbers import Real
 from copy import copy
 from .addons.variables import VarsAddon
 from enum import IntEnum
+from collections.abc import Mapping
 
 from typing import (
     TYPE_CHECKING, 
@@ -267,7 +268,7 @@ class Node(Base, ABC):
         else:
             # load from data
             # initial ports specifications are irrelevant then
-
+            self.clear_ports()
             for inp in inputs_data:
                 self.create_input(load_from=inp)
 
@@ -495,6 +496,15 @@ class Node(Base, ABC):
             if self.flow.connected_inputs(out):
                 return True
         return False
+    
+    def connected_inputs(self) -> Mapping[int, NodeOutput]:
+        res = {}
+        for i in range(self.num_inputs):
+            inp = self._inputs[i]
+            out = self.flow.connected_output(inp)
+            if out is not None:
+                res[i] = out
+        return res
     
     def input_connected(self, inp: int | NodeInput):
         if isinstance(inp, int):

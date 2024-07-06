@@ -386,9 +386,14 @@ class FlowPlayer(GraphPlayer):
         while root_nodes:
             successors.clear()
             for node in root_nodes:
-                for i, inp in enumerate(node._inputs):
-                    if self.executor.should_input_update(inp):
-                        node.update(i)
+                # this will only happen when it's a root node and doesn't have inputs
+                # TODO make this work for nodes that also have input ports
+                if node.num_inputs == 0:
+                    node.update()
+                else:
+                    for i, inp in enumerate(node._inputs):
+                        if self.executor.should_input_update(inp):
+                            node.update(i)
                 successors.update(self.flow.node_successors[node])
             root_nodes = list(successors)
         self.executor.clear_updates()

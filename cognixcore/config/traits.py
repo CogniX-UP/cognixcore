@@ -345,6 +345,8 @@ class NodeTraitsConfig(NodeConfig, HasTraits):
         configurations and configurations inside lists, dicts,
         sets and tuples.
         """
+        
+        self._trait_change_notify(False)
         self.block_change_events()
         for name, inner_data in data.items():
             try:
@@ -358,6 +360,7 @@ class NodeTraitsConfig(NodeConfig, HasTraits):
                 continue
         
         self.allow_change_events()
+        self._trait_change_notify(True)
     
     def _deserialize_trait_data(self, data):
         result = data
