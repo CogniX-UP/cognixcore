@@ -308,6 +308,7 @@
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
 <span class="kn">from</span> <span class="nn">.addons.variables</span> <span class="kn">import</span> <span class="n">VarsAddon</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">TYPE_CHECKING</span><span class="p">,</span> 
@@ -634,7 +635,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># load from data</span>
             <span class="c1"># initial ports specifications are irrelevant then</span>
-
+            <span class="bp">self</span><span class="o">.</span><span class="n">clear_ports</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputs_data</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">create_input</span><span class="p">(</span><span class="n">load_from</span><span class="o">=</span><span class="n">inp</span><span class="p">)</span>
 
@@ -930,6 +931,18 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">connected_inputs</span><span class="p">(</span><span class="n">out</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span></div>
+
+    
+<div class="viewcode-block" id="Node.connected_inputs">
+<a class="viewcode-back" href="../../autoapi/cognixcore/node/index.html#cognixcore.Node.connected_inputs">[docs]</a>
+    <span class="k">def</span> <span class="nf">connected_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NodeOutput</span><span class="p">]:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_inputs</span><span class="p">):</span>
+            <span class="n">inp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">connected_output</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">out</span>
+        <span class="k">return</span> <span class="n">res</span></div>
 
     
 <div class="viewcode-block" id="Node.input_connected">

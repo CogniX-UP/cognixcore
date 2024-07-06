@@ -1046,6 +1046,9 @@ Package Contents
    .. py:method:: any_output_connected()
 
 
+   .. py:method:: connected_inputs() -> collections.abc.Mapping[int, cognixcore.port.NodeOutput]
+
+
    .. py:method:: input_connected(inp: int | cognixcore.port.NodeInput)
 
 

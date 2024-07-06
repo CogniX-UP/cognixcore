@@ -690,6 +690,8 @@
 <span class="sd">        configurations and configurations inside lists, dicts,</span>
 <span class="sd">        sets and tuples.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trait_change_notify</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">block_change_events</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">inner_data</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">try</span><span class="p">:</span>
@@ -702,7 +704,8 @@
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">continue</span>
         
-        <span class="bp">self</span><span class="o">.</span><span class="n">allow_change_events</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allow_change_events</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trait_change_notify</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
 
     
     <span class="k">def</span> <span class="nf">_deserialize_trait_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
