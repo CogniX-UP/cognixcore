@@ -693,6 +693,11 @@ are established.</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.clear_ports">
+<span class="sig-name descname"><span class="pre">clear_ports</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.clear_ports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.clear_ports" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cognixcore.node.Node.create_input">
 <span class="sig-name descname"><span class="pre">create_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../port/index.html#cognixcore.port.PortConfig" title="cognixcore.port.PortConfig"><span class="pre">cognixcore.port.PortConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insert</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.create_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.create_input" title="Link to this definition">¶</a></dt>
 <dd><p>Creates and adds a new input at the end or index <code class="docutils literal notranslate"><span class="pre">insert</span></code> if specified.</p>
@@ -702,6 +707,12 @@ are established.</p>
 <dt class="sig sig-object py" id="cognixcore.node.Node.rename_input">
 <span class="sig-name descname"><span class="pre">rename_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.rename_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.rename_input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.clear_inputs">
+<span class="sig-name descname"><span class="pre">clear_inputs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.clear_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.clear_inputs" title="Link to this definition">¶</a></dt>
+<dd><p>Deletes all the inputs</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cognixcore.node.Node.delete_input">
@@ -719,6 +730,12 @@ are established.</p>
 <dt class="sig sig-object py" id="cognixcore.node.Node.rename_output">
 <span class="sig-name descname"><span class="pre">rename_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.rename_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.rename_output" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cognixcore.node.Node.clear_outputs">
+<span class="sig-name descname"><span class="pre">clear_outputs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/cognixcore/node.html#Node.clear_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cognixcore.node.Node.clear_outputs" title="Link to this definition">¶</a></dt>
+<dd><p>Deletes all the outputs</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cognixcore.node.Node.delete_output">
@@ -1019,11 +1036,14 @@ abstract and their version attribute is not None.</p>
 <li><a class="reference internal" href="#cognixcore.node.Node.any_output_connected"><code class="docutils literal notranslate"><span class="pre">Node.any_output_connected()</span></code></a></li>
 <li><a class="reference internal" href="#cognixcore.node.Node.input_connected"><code class="docutils literal notranslate"><span class="pre">Node.input_connected()</span></code></a></li>
 <li><a class="reference internal" href="#cognixcore.node.Node.output_connected"><code class="docutils literal notranslate"><span class="pre">Node.output_connected()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.clear_ports"><code class="docutils literal notranslate"><span class="pre">Node.clear_ports()</span></code></a></li>
 <li><a class="reference internal" href="#cognixcore.node.Node.create_input"><code class="docutils literal notranslate"><span class="pre">Node.create_input()</span></code></a></li>
 <li><a class="reference internal" href="#cognixcore.node.Node.rename_input"><code class="docutils literal notranslate"><span class="pre">Node.rename_input()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.clear_inputs"><code class="docutils literal notranslate"><span class="pre">Node.clear_inputs()</span></code></a></li>
 <li><a class="reference internal" href="#cognixcore.node.Node.delete_input"><code class="docutils literal notranslate"><span class="pre">Node.delete_input()</span></code></a></li>
 <li><a class="reference internal" href="#cognixcore.node.Node.create_output"><code class="docutils literal notranslate"><span class="pre">Node.create_output()</span></code></a></li>
 <li><a class="reference internal" href="#cognixcore.node.Node.rename_output"><code class="docutils literal notranslate"><span class="pre">Node.rename_output()</span></code></a></li>
+<li><a class="reference internal" href="#cognixcore.node.Node.clear_outputs"><code class="docutils literal notranslate"><span class="pre">Node.clear_outputs()</span></code></a></li>
 <li><a class="reference internal" href="#cognixcore.node.Node.delete_output"><code class="docutils literal notranslate"><span class="pre">Node.delete_output()</span></code></a></li>
 <li><a class="reference internal" href="#cognixcore.node.Node.get_addon"><code class="docutils literal notranslate"><span class="pre">Node.get_addon()</span></code></a></li>
 <li><a class="reference internal" href="#cognixcore.node.Node.progress"><code class="docutils literal notranslate"><span class="pre">Node.progress</span></code></a></li>

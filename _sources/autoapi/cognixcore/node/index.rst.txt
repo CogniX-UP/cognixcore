@@ -398,6 +398,9 @@ Module Contents
    .. py:method:: output_connected(out: int | cognixcore.port.NodeOutput)
 
 
+   .. py:method:: clear_ports()
+
+
    .. py:method:: create_input(port_info: cognixcore.port.PortConfig = None, load_from=None, insert: int = None)
 
       Creates and adds a new input at the end or index ``insert`` if specified.
@@ -405,6 +408,12 @@ Module Contents
 
 
    .. py:method:: rename_input(index: int, label: str)
+
+
+   .. py:method:: clear_inputs()
+
+      Deletes all the inputs
+
 
 
    .. py:method:: delete_input(index: int)
@@ -420,6 +429,12 @@ Module Contents
 
 
    .. py:method:: rename_output(index: int, label: str)
+
+
+   .. py:method:: clear_outputs()
+
+      Deletes all the outputs
+
 
 
    .. py:method:: delete_output(index: int)
