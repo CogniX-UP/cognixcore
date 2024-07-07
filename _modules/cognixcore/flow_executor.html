@@ -382,12 +382,20 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flow</span><span class="p">:</span> <span class="n">Flow</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outputs_updated</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">NodeOutput</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs_read</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">NodeInput</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         
 <div class="viewcode-block" id="ManualFlow.update_node">
 <a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ManualFlow.update_node">[docs]</a>
     <span class="k">def</span> <span class="nf">update_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">node</span><span class="o">.</span><span class="n">update_event</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+            <span class="c1"># this means we have no input</span>
+            <span class="k">if</span> <span class="n">inp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">update_event</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">inp_port</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">_inputs</span><span class="p">[</span><span class="n">inp</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">should_input_update</span><span class="p">(</span><span class="n">inp_port</span><span class="p">):</span>
+                    <span class="n">node</span><span class="o">.</span><span class="n">update_event</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">inputs_read</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">inp_port</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">node</span><span class="o">.</span><span class="n">update_err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
 
@@ -418,7 +426,7 @@
 <a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ManualFlow.should_input_update">[docs]</a>
     <span class="k">def</span> <span class="nf">should_input_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="n">NodeInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">connected_output</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">out</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs_updated</span></div>
+        <span class="k">return</span> <span class="n">out</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs_updated</span> <span class="ow">and</span> <span class="n">inp</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs_read</span></div>
 
     
 <div class="viewcode-block" id="ManualFlow.has_updated_outputs">
@@ -433,7 +441,8 @@
 <div class="viewcode-block" id="ManualFlow.clear_updates">
 <a class="viewcode-back" href="../../autoapi/cognixcore/index.html#cognixcore.flow_executor.ManualFlow.clear_updates">[docs]</a>
     <span class="k">def</span> <span class="nf">clear_updates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">outputs_updated</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs_updated</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs_read</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
 </div>
 
         
