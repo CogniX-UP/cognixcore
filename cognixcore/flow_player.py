@@ -376,6 +376,7 @@ class FlowPlayer(GraphPlayer):
         if self._state != GraphState.STOPPED:
             self._stop_flag = True
     
+    # TODO recheck this, might not be an ideal algorithm
     def __update(self, root_nodes: list[Node]):
         """
         Updates with nodes as the root
@@ -391,9 +392,9 @@ class FlowPlayer(GraphPlayer):
                 if node.num_inputs == 0:
                     node.update()
                 else:
-                    for i, inp in enumerate(node._inputs):
-                        if self.executor.should_input_update(inp):
-                            node.update(i)
+                    for i in range(node.num_inputs):
+                        node.update(i)
+                            
                 successors.update(self.flow.node_successors[node])
             root_nodes = list(successors)
         self.executor.clear_updates()

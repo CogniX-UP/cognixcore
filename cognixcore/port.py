@@ -4,8 +4,10 @@ from .rc import PortObjPos, ConnValidType
 
 from dataclasses import dataclass
 from beartype.door import is_subhint
+from types import UnionType
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, get_args
+
 if TYPE_CHECKING:
     from .node import Node
 
@@ -99,6 +101,15 @@ def check_valid_data(type_out: type, type_in: type) -> bool:
     if not type_in:
         type_in = object
     
+    # If it's a Union, we break it into its parts to check
+    if isinstance(type_out, UnionType):
+        ar = get_args(type_out)
+        for t in ar:
+            if is_subhint(t, type_in):
+                return True
+        return False
+    
+    # Not a Union, simple type checking
     return is_subhint(type_out, type_in)
 
 def check_valid_conn(out: NodeOutput, inp: NodeInput) -> ConnValidType:

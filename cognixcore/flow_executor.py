@@ -69,10 +69,18 @@ class ManualFlow(FlowExecutor):
     def __init__(self, flow: Flow):
         super().__init__(flow)
         self.outputs_updated: set[NodeOutput] = set()
+        self.inputs_read: set[NodeInput] = set()
         
     def update_node(self, node: Node, inp: int):
         try:
-            node.update_event(inp)
+            # this means we have no input
+            if inp < 0:
+                node.update_event(inp)
+            else:
+                inp_port = node._inputs[inp]
+                if self.should_input_update(inp_port):
+                    node.update_event(inp)
+                    self.inputs_read.add(inp_port)
         except Exception as e:
             node.update_err(e)
     
@@ -94,7 +102,7 @@ class ManualFlow(FlowExecutor):
     
     def should_input_update(self, inp: NodeInput) -> bool:
         out = self.flow.connected_output(inp)
-        return out in self.outputs_updated
+        return out in self.outputs_updated and inp not in self.inputs_read
     
     def has_updated_outputs(self, node: Node) -> bool:
         for out in node._outputs:
@@ -104,6 +112,7 @@ class ManualFlow(FlowExecutor):
 
     def clear_updates(self):
         self.outputs_updated.clear()
+        self.inputs_read.clear()
         
 class DataFlowNaive(FlowExecutor):
     """
