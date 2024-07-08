@@ -83,6 +83,7 @@ class ManualFlow(FlowExecutor):
                     self.inputs_read.add(inp_port)
         except Exception as e:
             node.update_err(e)
+            raise e
     
     def input(self, node: Node, index: int):
         inp = node._inputs[index]
