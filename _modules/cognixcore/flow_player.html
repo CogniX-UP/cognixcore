@@ -743,6 +743,8 @@
             
             <span class="c1"># frame update - these are our roots each frame</span>
             <span class="n">frame_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__gather_frame_nodes</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">frame_nodes</span><span class="p">:</span>
+                <span class="k">break</span>
             <span class="n">frame_successors</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">frame_nodes</span><span class="p">:</span>
                 <span class="n">node</span><span class="o">.</span><span class="n">frame_update</span><span class="p">()</span>
