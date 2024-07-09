@@ -343,6 +343,8 @@ class FlowPlayer(GraphPlayer):
             
             # frame update - these are our roots each frame
             frame_nodes = self.__gather_frame_nodes()
+            if not frame_nodes:
+                break
             frame_successors.clear()
             for node in frame_nodes:
                 node.frame_update()
