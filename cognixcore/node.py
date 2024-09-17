@@ -39,6 +39,25 @@ if TYPE_CHECKING:
     from .flow_player import GraphPlayer
     from logging import Logger
 
+_work = '_work'
+
+def processor(func):
+    """A decorator for characterizing a method of a `Node` as a worker that processes M inputs and gives N outputs."""
+    def func_wrapper(*args, **kwargs):
+        return func(*args, **kwargs)
+    proc_attr = 'processor'
+    setattr(func_wrapper, proc_attr, True)
+    return func_wrapper
+
+def processor():
+    """A decorator for characterizing a method of a `Node` as a worker that processes M inputs and gives N outputs."""
+    def func_wrapper(func):
+        def self_wrapper(self):
+            return func(self)
+        setattr(self_wrapper, _work, True)
+        return self_wrapper
+    return func_wrapper
+
 class Node(Base, ABC):
     """
     Base class for all node blueprints. Such a blueprint is made by subclassing this class and registering that subclass
@@ -81,6 +100,9 @@ class Node(Base, ABC):
     _identifiable: Identifiable = None
     """The internal identifiable for characterizing this type"""
     
+    _workers: dict[str, function] = {}
+    """The workers of the node. These are class methods that take some inputs and set some outputs."""
+
     @classmethod
     def build_identifiable(cls):
         """Builds the internal identifiable that helps group nodes."""
@@ -111,7 +133,14 @@ class Node(Base, ABC):
         # however, one can also build it externally to change
         # the structure of their package
         cls.build_identifiable()
-            
+
+        # Find the workers of the node and the ports
+        for name, obj in cls.__dict__.items():
+            if hasattr(obj, _work):
+                cls._workers[name] = obj
+            # elif isinstance(obj, Port):
+                # cls._port_configs[name] = obj
+    
     @classmethod
     def type_to_data(cls) -> dict[str, ]:
         return {

@@ -38,7 +38,7 @@ from dataclasses import dataclass
 
 from ..port import PortConfig, NodePort
 from ..node import Node
-from ._abc import NodeConfig
+from ._abc import NodeConfig, ConfigChange, ParamChange, ListChange, SetChange, DictChange
 
 #   UTIL
 
@@ -296,6 +296,7 @@ class NodeTraitsConfig(NodeConfig, HasTraits):
     # redefine them as non serializable traits
     _node = Instance(Node, visible=False)
     _config_changed = Set(visible=False)
+    _param_changed = Dict(visible=False)
     _allow_change = List([True], visible=False)
     traits_view = None
     
@@ -330,13 +331,32 @@ class NodeTraitsConfig(NodeConfig, HasTraits):
             return ev.added == ev.removed
         return False
     
+    def _on_trait_changed(self, change: TraitChangeEvent | ListChangeEvent | SetChangeEvent | DictChangeEvent):
+
+        if not self._allow_change[0] or self.is_duplicate_notif(change):
+            return
+        
+        if isinstance(change, TraitChangeEvent):
+            config_change = ParamChange(self, change.name, change.old, change.new)
+        elif isinstance(change, ListChangeEvent):
+            trait_list: TraitListObject = change.object
+            config_change = ListChange(self, trait_list.name, change.index, change.added, change.removed)
+        elif isinstance(change, SetChangeEvent):
+            trait_set: TraitSetObject = change.object
+            config_change = SetChange(self, trait_set.name, change.added, change.removed)
+        else:
+            trait_dict: TraitDictObject = change.object
+            config_change = DictChange(self, trait_dict.name, change.added, change.removed)
+
+        self._on_config_changed(config_change)
+    
     def allow_notifications(self):
         """Allows the invocation of events when a trait changes"""
-        self.observe(self._on_config_changed, self.__obs_exprs)
+        self.observe(self._on_trait_changed, self.__obs_exprs)
 
     def block_notifications(self):
         """Blocks the invocation of events when a trait changes"""
-        self.observe(self._on_config_changed, self.__obs_exprs, remove=True)
+        self.observe(self._on_trait_changed, self.__obs_exprs, remove=True)
         
     def load(self, data: dict):
         """
