@@ -5,14 +5,17 @@ from .base import Base, Identifiable, IdentifiableGroups, Event
 
 from .port import (
     default_config, 
-    PortConfig, 
+    Port,
+    Input,
+    Output,
+    _RootPortGroup,
+    PortGroup,
     NodeInput, 
     NodeOutput, 
-    NodePort
 )
 from .info_msgs import InfoMsgs
 from .utils import serialize, deserialize
-from .rc import ProgressState
+from .rc import ProgressState, PortObjPos
 from .addons import AddonType
 from .config import NodeConfig
 from .utils import get_mod_classes
@@ -30,9 +33,7 @@ from typing import (
     TYPE_CHECKING, 
     Any, 
     TypeVar, 
-    Callable, 
-    ParamSpec,
-    Generic
+    Callable,
 )
 if TYPE_CHECKING:
     from .flow import Flow
@@ -85,11 +86,8 @@ class Node(Base, ABC):
     applies only in Cognix, not in cognixcore.
     """
 
-    init_inputs: list[PortConfig] = []
-    """list of node input types determining the initial inputs"""
-
-    init_outputs: list[PortConfig] = []
-    """initial outputs list, see ``init_inputs``"""
+    _port_definitions: dict[str, PortGroup] = {}
+    """Holds all the definitions for the ports per Node subclass"""
 
     inner_config_type: type[NodeConfig] | None = None
     """
@@ -134,12 +132,15 @@ class Node(Base, ABC):
         # the structure of their package
         cls.build_identifiable()
 
+        # Find all 
         # Find the workers of the node and the ports
         for name, obj in cls.__dict__.items():
-            if hasattr(obj, _work):
-                cls._workers[name] = obj
-            # elif isinstance(obj, Port):
-                # cls._port_configs[name] = obj
+            # find all port definitions
+            if isinstance(obj, PortGroup):
+                obj._name = name
+                cls._port_definitions[name] = obj
+
+            # TODO workers etc later
     
     @classmethod
     def type_to_data(cls) -> dict[str, ]:
@@ -147,7 +148,7 @@ class Node(Base, ABC):
             'title': cls.title,
             'tags': cls.tags,
             'version': cls.version,
-            'decs': cls.__doc__
+            'desc': cls.__doc__
         }
     #
     # INITIALIZATION
@@ -159,8 +160,16 @@ class Node(Base, ABC):
         self.flow = flow
         self.session = flow.session
         
-        self._inputs: list[NodeInput] = []
-        self._outputs: list[NodeOutput] = []
+        self._inputs = _RootPortGroup(PortObjPos.INPUT)
+        self._outputs = _RootPortGroup(PortObjPos.OUTPUT)
+        
+        self._input_groups: dict[str, PortGroup] = {}
+        self._input_list: list[Input] = []
+        self._inputs: dict[str, Input] = {}
+        
+        self._output_groups: dict[str, PortGroup] = {}
+        self._output_list: list[Output] = []
+        self._outputs: dict[str, Output] = {}
         
         self.loaded = False
         self.load_data = None
@@ -173,16 +182,15 @@ class Node(Base, ABC):
         
         # action
         self._actions = IdentifiableGroups[NodeAction]()
+
         # events
         self.updated = Event[int]()
         self.updating = Event[int]()
         self.update_error = Event[Exception]()
         self.input_added = Event[Node, int, NodeInput]()
         self.input_removed = Event[Node, int, NodeInput]()
-        self.input_renamed = Event[Node, int, NodeInput, str]()
         self.output_added = Event[Node, int, NodeOutput]()
         self.output_removed = Event[Node, int, NodeOutput]()
-        self.output_renamed = Event[Node, int, NodeOutput, str]()
         self.output_updated = Event[Node, int, NodeOutput, Any]()
         self.config_changed = Event[NodeConfig]()
         self.progress_updated = Event[ProgressState]()
@@ -193,7 +201,14 @@ class Node(Base, ABC):
             self._config = self.inner_config_type(self)
         else:
             self._config = None
-    
+        
+        # init ports / groups
+        for name, port_def in self._port_definitions.items():
+            gr = port_def.copy()
+            self.add_group(name, gr, False)
+        
+        self._setup_ports()
+            
     @property
     def num_inputs(self):
         """The number of input ports."""
@@ -283,26 +298,24 @@ class Node(Base, ABC):
         self._actions.add(id)
         return action
 
-    def _setup_ports(self, inputs_data=None, outputs_data=None):
-
-        if not inputs_data and not outputs_data:
-            # generate initial ports
-
-            for p_info in self.init_inputs:
-                self.create_input(p_info)
-
-            for p_info in self.init_outputs:
-                self.create_output(p_info)
-
+    def _groups(self, group: PortGroup) -> dict[str, PortGroup]:
+        io_type = group.io_type
+        if io_type == PortObjPos.INPUT:
+            groups = self._input_groups
         else:
-            # load from data
-            # initial ports specifications are irrelevant then
-            self.clear_ports()
-            for inp in inputs_data:
-                self.create_input(load_from=inp)
+            groups = self._output_groups
+        
+        return groups
+    
+    def _setup_inputs(self):
+        pass
 
-            for out in outputs_data:
-                self.create_output(load_from=out)
+    def _setup_outputs(self):
+        pass
+
+    def _setup_ports(self):
+        self._setup_inputs()
+        self._setup_outputs()
 
     def after_placement(self):
         """Called from Flow when the nodes gets added."""
@@ -510,6 +523,24 @@ class Node(Base, ABC):
     """
 
     #   PORTS
+    def add_group(self, name: str, group: PortGroup, fix_order=True):
+        groups = self._groups(group)
+        if name in groups:
+            return
+        
+        group.init(self, name)
+        groups[name] = group
+
+        if fix_order:
+            self._setup_ports()
+    
+    def remove_group(self, group: PortGroup, fix_order=True):
+        groups = self._groups(group)
+        if group.name not in groups:
+            return
+        del groups[group.name]
+        if fix_order:
+            self._setup_ports()
         
     def any_port_connected(self):
         return self.any_input_connected() or self.any_output_connected()
@@ -549,132 +580,6 @@ class Node(Base, ABC):
             out = self._outputs[out]
         return len(self.flow.connected_inputs(out)) > 0
     
-    def clear_ports(self):
-        self.clear_inputs()
-        self.clear_outputs()
-        
-    def create_input(self, port_info: PortConfig = None, load_from = None, insert: int = None):
-        """
-        Creates and adds a new input at the end or index ``insert`` if specified.
-        """
-        
-        p_info = port_info if port_info else default_config
-
-        inp = NodeInput(
-            node=self, 
-            type_=p_info.type_, 
-            label_str=p_info.label, 
-            default=p_info.default, 
-            allowed_data=p_info.allowed_data
-        )
-
-        if load_from is not None:
-            inp.load(load_from)
-
-        if insert is not None:
-            self._inputs.insert(insert, inp)
-            index = insert
-        else:
-            self._inputs.append(inp)
-            index = len(self._inputs) - 1
-
-        self.input_added.emit(self, index, inp)
-
-        return inp
-
-    def rename_input(self, index: int, label: str):
-        inp = self._inputs[index]
-        if inp.label_str != label:
-            old_label = inp.label_str
-            inp.label_str = label
-            self.input_renamed.emit(
-                self,
-                index,
-                inp,
-                old_label
-            )
-
-    def clear_inputs(self):
-        """Deletes all the inputs"""
-        for i in range(self.num_inputs):
-            self.delete_input(len(self._inputs) - 1)
-            
-    def delete_input(self, index: int):
-        """
-        Disconnects and removes an input.
-        """
-
-        inp: NodeInput = self._inputs[index]
-
-        # break all connections
-        out = self.flow.connected_output(inp)
-        if out is not None:
-            self.flow.disconnect_ports(out, inp)
-
-        self._inputs.remove(inp)
-
-        self.input_removed.emit(self, index, inp)
-
-    def create_output(self, port_info: PortConfig = None, load_from=None, insert: int = None):
-        """
-        Creates and adds a new output at the end or index ``insert`` if specified.
-        """
-
-        p_info = port_info if port_info else default_config
-        
-        out = NodeOutput(
-            node=self,
-            type_=p_info.type_,
-            label_str=p_info.label,
-            allowed_data=p_info.allowed_data
-        )
-
-        if load_from is not None:
-            out.load(load_from)
-
-        if insert is not None:
-            self._outputs.insert(insert, out)
-            index = insert
-        else:
-            self._outputs.append(out)
-            index = len(self._outputs) - 1
-
-        self.output_added.emit(self, index, out)
-
-        return out
-
-    def rename_output(self, index: int, label: str):
-        out = self._outputs[index]
-        if out.label_str != label:
-            old_label = out.label_str
-            out.label_str = label
-            self.output_renamed.emit(
-                self,
-                index,
-                out,
-                old_label
-            )
-
-    def clear_outputs(self):
-        """Deletes all the outputs"""
-        for i in range(self.num_outputs):
-            self.delete_output(len(self._outputs) - 1)
-        
-    def delete_output(self, index: int):
-        """
-        Disconnects and removes output.
-        """
-
-        out: NodeOutput = self._outputs[index]
-
-        # break all connections
-        for inp in self.flow.connected_inputs(out):
-            self.flow.disconnect_ports(out, inp)
-
-        self._outputs.remove(out)
-
-        self.output_removed.emit(self, index, out)
-
     #   VARIABLES
 
     def get_addon(self, addon: type[AddonType] | str) -> AddonType:
@@ -752,13 +657,6 @@ class Node(Base, ABC):
 
         self.load_data = data
 
-        # setup ports
-        # remove initial ports
-        self._inputs = []
-        self._outputs = []
-        # load from data
-        self._setup_ports(data['inputs'], data['outputs'])
-
         # config
         config_data = data.get('config')
         if self._config and config_data:
@@ -797,9 +695,6 @@ class Node(Base, ABC):
 
             'state data': serialize(self.get_state()),
             'additional data': self.additional_data(),
-
-            'inputs': [i.data() for i in self._inputs],
-            'outputs': [o.data() for o in self._outputs],
             
             'config': self._config.data() if self._config else None
         }
